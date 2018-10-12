@@ -167,15 +167,15 @@ INSERT INTO `locatie` (`id`, `naam`, `code`) VALUES
 --
 
 ALTER TABLE `boeking`
-  ADD KEY `klantId` (`klantId`),
-  ADD KEY `terugReisId` (`terugReisId`),
-  ADD KEY `heenReisId` (`heenReisId`);
+  ADD FOREIGN KEY (klantId) REFERENCES klant(id),
+  ADD FOREIGN KEY (terugReisId) REFERENCES reis(id),
+  ADD FOREIGN KEY (heenReisId) REFERENCES reis(id);
 
 --
 -- FKs for table `reis`
 --
 
 ALTER TABLE `reis`
-  ADD KEY `vertrekLocatieId` (`vertrekLocatieId`),
-  ADD KEY `bestemmingLocatieId` (`bestemmingLocatieId`),
-  ADD KEY `transportmiddelId` (`transportmiddelId`);
+  ADD FOREIGN KEY (vertrekLocatieId) REFERENCES locatie(id),
+  ADD FOREIGN KEY (bestemmingLocatieId) REFERENCES locatie(id),
+  ADD FOREIGN KEY (transportmiddelId) REFERENCES transportmiddel(id);
