@@ -10,7 +10,7 @@
     <ui:composition template = "templates/templ.xhtml">
         <ui:define name = "content">
             <h:link value="reizenOverzicht" outcome="reizenOverzicht"></h:link>
-            <p:dataTable var="Locatie" value="#{locationController.locaties}" id="locationDataTable">
+            <p:dataTable var="Locatie" value="#{locatieController.locaties}" id="locationDataTable">
                 <p:column headerText="Id">
                     <h:outputText value="#{Locatie.id}" />
                 </p:column>
