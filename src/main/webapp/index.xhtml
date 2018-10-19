@@ -9,32 +9,36 @@
 <h:body>
     <ui:composition template = "templates/templ.xhtml">
         <ui:define name = "content">
-            <p:dataTable var="location" value="#{locationController.locations}" id="locationDataTable">
+            <p:dataTable var="Locatie" value="#{locatieController.locaties}" id="LocatieDataTable">
                 <p:column headerText="Id">
-                    <h:outputText value="#{location.id}" />
+                    <h:outputText value="#{Locatie.id}" />
                 </p:column>
 
                 <p:column headerText="Name">
-                    <h:outputText value="#{location.name}" />
+                    <h:outputText value="#{Locatie.naam}" />
                 </p:column>
 
                 <p:column headerText="Code">
-                    <h:outputText value="#{location.code}" />
+                    <h:outputText value="#{Locatie.code}" />
                 </p:column>
             </p:dataTable>
-            <h:form id="addLocationForm">
+            <h:form id="addLocatieForm">
                 <p:panel id="panel" header="Form" style="margin-bottom:10px;">
                     <h:panelGrid columns="4" cellpadding="5">
-                        <h:outputLabel for="locationName" value="Name:" />
-                        <p:inputText id="locationName" value="#{locationController.newLocation.name}"></p:inputText>
-                        <h:outputLabel for="locationCode" value="Code:" />
-                        <p:inputText id="locationCode" value="#{locationController.newLocation.code}">
+                        <h:outputLabel for="LocatieName" value="Name:" />
+                        <p:inputText id="LocatieName" value="#{locatieController.newLocatie.naam}"></p:inputText>
+                        <h:outputLabel for="LocatieCode" value="Code:" />
+                        <p:inputText id="LocatieCode" value="#{locatieController.newLocatie.code}">
                         </p:inputText>
-                        <h:commandButton value="Toevoegen" action="#{locationController.submit}" update=":locationDataTable" />
+                        <h:commandButton value="Toevoegen" action="#{locatieController.submit}" update=":LocatieDataTable" />
                     </h:panelGrid>
                 </p:panel>
             </h:form>
-
+            <h:form>
+            <h:commandLink action="register">INLOGGEN</h:commandLink>
+                <hr/>
+            <h:commandLink action="register">LOGIN</h:commandLink>
+            </h:form>
 
         </ui:define>
     </ui:composition>

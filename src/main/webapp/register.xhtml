@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:form id="addLocationForm">
+    <p:panel id="panel" header="Form" style="margin-bottom:10px;">
+        <h:panelGrid columns="4" cellpadding="5">
+            <h:outputLabel for="Email" value="Email:" />
+            <p:inputText id="Email" value="#{klantController.klant.email}"></p:inputText>
+            <h:outputLabel for="Wachtwoord" value="Wachtwoord:" />
+            <p:inputText id="Wachtwoord" value="#{klantController.klant.wachtwoord}">
+            </p:inputText>
+            <h:commandButton value="Register" action="#{klantController.submit}"/>
+        </h:panelGrid>
+    </p:panel>
+</h:form>
+
+</html>
