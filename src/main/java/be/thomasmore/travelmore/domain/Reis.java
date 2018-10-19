@@ -4,6 +4,14 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "reis")
+@NamedQueries(
+        {
+                @NamedQuery(
+                        name = Reis.FIND_ALL,
+                        query = "SELECT r FROM Reis r"
+                )
+        }
+)
 
 public class Reis {
     public static final String FIND_ALL = "Reis.findAll";
@@ -15,9 +23,13 @@ public class Reis {
     @Column(name = "bestemmingLocatieId")
     private int bestemmingLocatieId;
     @Column(name = "prijs")
-    private boolean prijs;
+    private double prijs;
     @Column(name = "transportMiddelId")
     private int transportMiddelId;
+    @Column(name = "vertrekDatum")
+    private String vertrekDatum;
+    @Column(name = "vertrekUur")
+    private String vertrekUur;
 
     public Reis() {
     }
@@ -46,11 +58,11 @@ public class Reis {
         this.bestemmingLocatieId = bestemmingLocatieId;
     }
 
-    public boolean isPrijs() {
+    public double getPrijs() {
         return prijs;
     }
 
-    public void setPrijs(boolean prijs) {
+    public void setPrijs(double prijs) {
         this.prijs = prijs;
     }
 
@@ -60,5 +72,21 @@ public class Reis {
 
     public void setTransportMiddelId(int transportMiddelId) {
         this.transportMiddelId = transportMiddelId;
+    }
+
+    public String getVertrekDatum() {
+        return vertrekDatum;
+    }
+
+    public void setVertrekDatum(String vertrekDatum) {
+        this.vertrekDatum = vertrekDatum;
+    }
+
+    public String getVertrekUur() {
+        return vertrekUur;
+    }
+
+    public void setVertrekUur(String vertrekUur) {
+        this.vertrekUur = vertrekUur;
     }
 }

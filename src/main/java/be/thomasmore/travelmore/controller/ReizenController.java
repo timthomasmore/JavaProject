@@ -15,7 +15,7 @@ public class ReizenController {
     @Inject
     private ReisService reisService;
 
-    public List<Reis> getLocations(){
+    public List<Reis> getReizen(){
         return this.reisService.findAllReizen();
     }
 }
