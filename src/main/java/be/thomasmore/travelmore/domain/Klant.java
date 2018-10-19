@@ -1,14 +1,25 @@
 package be.thomasmore.travelmore.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "klant")
+@NamedQueries(
+        {
+                @NamedQuery(
+                        name = Klant.FIND_BY_EMAIL,
+                        query = "SELECT l FROM Klant l WHERE l.email = :email"
+                ),
+                @NamedQuery(
+                        name = Klant.FIND_ALL,
+                        query = "SELECT l FROM Klant l"
+                )
+        }
+)
 
 public class Klant {
+    public static final String FIND_ALL = "Klant.findAll";
+    public static final String FIND_BY_EMAIL = "Klant.findByEmail";
 
     @Id
     private int id;
@@ -23,6 +34,8 @@ public class Klant {
 
     public Klant() {
     }
+
+
 
     public int getId() {
         return id;
