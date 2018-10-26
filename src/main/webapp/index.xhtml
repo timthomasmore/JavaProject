@@ -9,8 +9,7 @@
 <h:body>
     <ui:composition template = "templates/templ.xhtml">
         <ui:define name = "content">
-            <h:link value="reizenOverzicht" outcome="reizenOverzicht"></h:link>
-            <p:dataTable var="Locatie" value="#{locatieController.locaties}" id="locationDataTable">
+            <p:dataTable var="Locatie" value="#{locatieController.locaties}" id="LocatieDataTable">
                 <p:column headerText="Id">
                     <h:outputText value="#{Locatie.id}" />
                 </p:column>
@@ -23,19 +22,29 @@
                     <h:outputText value="#{Locatie.code}" />
                 </p:column>
             </p:dataTable>
-            <h:form id="addLocationForm">
+            <h:form id="addLocatieForm">
                 <p:panel id="panel" header="Form" style="margin-bottom:10px;">
                     <h:panelGrid columns="4" cellpadding="5">
-                        <h:outputLabel for="locationName" value="Name:" />
-                        <p:inputText id="locationName" value="#{locationController.newLocation.name}"></p:inputText>
-                        <h:outputLabel for="locationCode" value="Code:" />
-                        <p:inputText id="locationCode" value="#{locationController.newLocation.code}">
+                        <h:outputLabel for="LocatieName" value="Name:" />
+                        <p:inputText id="LocatieName" value="#{locatieController.newLocatie.naam}"></p:inputText>
+                        <h:outputLabel for="LocatieCode" value="Code:" />
+                        <p:inputText id="LocatieCode" value="#{locatieController.newLocatie.code}">
                         </p:inputText>
-                        <h:commandButton value="Toevoegen" action="#{locationController.submit}" update=":locationDataTable" />
+                        <h:commandButton value="Toevoegen" action="#{locatieController.submit}" update=":LocatieDataTable" />
                     </h:panelGrid>
                 </p:panel>
             </h:form>
 
+            <h:form rendered="#{sessionVariables.gebruiker == null}">
+            <h:link outcome="register">registreren</h:link>
+                <hr/>
+            <h:link outcome="login">inloggen</h:link>
+            </h:form>
+            <h:form rendered="#{sessionVariables.gebruiker != null}">
+                <h:outputText value="Welkom #{sessionVariables.gebruiker.voornaam}" />
+                <br/>
+                <h:commandLink action="#{klantController.logout}"> Logout </h:commandLink>
+            </h:form>
 
         </ui:define>
     </ui:composition>

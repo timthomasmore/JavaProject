@@ -2,11 +2,14 @@ package be.thomasmore.travelmore.controller;
 
 import be.thomasmore.travelmore.domain.Klant;
 import be.thomasmore.travelmore.service.KlantService;
+import be.thomasmore.travelmore.utility.SessionVariables;
+import be.thomasmore.travelmore.utility.Singletons;
 
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.lang.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -33,25 +36,30 @@ public class KlantController {
         return this.klantService.findAllKlanten();
     }
 
-    public void submit(){
+    public String register(){
+        klant.setWachtwoord(encrypt(klant.getWachtwoord()));
         this.klantService.insert(klant);
-    }
-
-
-
-
-
-    public void register(String email, String pass, String voornaam, String achternaam){
-        String encodedpass =  encrypt(pass);
-        klant.setEmail(email);
-        klant.setWachtwoord(pass);
-        klant.setAchternaam(achternaam);
-        klant.setVoornaam(voornaam);
-    }
-
-    public void login(){
+        Singletons.getInstance().setGebruiker(klant);
+        return "index";
 
     }
+
+    public String login(){
+        Klant bestaandeklant = klantService.findKlantByEmail(klant.getEmail());
+
+        if(verify(klant.getWachtwoord(),bestaandeklant.getWachtwoord())){
+            Singletons.getInstance().setGebruiker(bestaandeklant);
+            System.out.println(Singletons.getInstance().getGebruiker());
+            return "index";
+        }
+        return "login";
+    }
+
+    public String logout(){
+        Singletons.getInstance().setGebruiker(null);
+        return "index";
+    }
+
 
     public String encrypt(String pass){
 
@@ -68,6 +76,8 @@ public class KlantController {
     }
 
     public Boolean verify(String pass, String encrypted){
+        pass = encrypt(pass);
+
         byte[] bytepass = pass.getBytes();
         byte[] byteencryption = encrypted.getBytes();
         return MessageDigest.isEqual(bytepass, byteencryption);
