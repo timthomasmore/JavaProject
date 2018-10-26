@@ -26,16 +26,17 @@ public class Klant {
     @Id
     private int id;
     @Column(name = "voornaam")
-    @Size(min = 1)
+    @Size(min = 1, message = "gelieve een voornaam in te geven")
     private String voornaam;
     @Column(name = "achternaam")
-    @Size(min = 1)
+    @Size(min = 1, message = "gelieve een achternaam in te geven")
     private String achternaam;
     @Column(name = "email")
-    @Pattern(regexp = "[A-z]+@[A-z]+.[A-z]+")
+    @Size(min = 1,message = "gelieve een email addres in te geven")
+    @Pattern(regexp = "[A-z]+@[A-z]+.[A-z]+",message = "Gelieve een geldig email addres in te geven")
     private String email;
     @Column(name = "wachtwoord")
-    @Size(min = 6)
+    @Size(min = 6, message = "Gelieve een wachtwoord van meer dan 6 characters in te geven")
     private String wachtwoord;
 
     public Klant() {

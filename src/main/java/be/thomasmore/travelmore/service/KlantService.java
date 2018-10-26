@@ -24,6 +24,8 @@ public class KlantService {
         return KlantRepository.findByEmail(email);
     }
 
+    public Boolean emailAvailable (String email) {return KlantRepository.emailAvailable(email);}
+
     public void insert(Klant Klant) {
         KlantRepository.insert(Klant);
     }
