@@ -17,7 +17,7 @@
 
     <br/>
     <h:outputLabel for="Wachtwoord" value="Wachtwoord:" />
-    <p:inputText id="Wachtwoord" value="#{klantController.klant.wachtwoord}"></p:inputText>
+    <h:inputSecret id="Wachtwoord" value="#{klantController.klant.wachtwoord}"></h:inputSecret>
 
 
     <br/>
@@ -25,7 +25,7 @@
 
     <br/>
     <h:outputLabel for="Voornaam" value="Voornaam:" />
-    <p:inputText id="Voornaam" value="#{klantController.klant.voornaam}"></p:inputText>
+    <p:inputText id="Voornaam" value="#{klantController.klant.voornaam}" ></p:inputText>
     <br/>
 
     <h:message for="Voornaam" style="color: red"/>
