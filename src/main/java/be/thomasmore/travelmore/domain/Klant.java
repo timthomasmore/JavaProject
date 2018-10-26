@@ -1,6 +1,8 @@
 package be.thomasmore.travelmore.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "klant")
@@ -24,12 +26,16 @@ public class Klant {
     @Id
     private int id;
     @Column(name = "voornaam")
+    @Size(min = 1)
     private String voornaam;
     @Column(name = "achternaam")
+    @Size(min = 1)
     private String achternaam;
     @Column(name = "email")
+    @Pattern(regexp = "[A-z]+@[A-z]+.[A-z]+")
     private String email;
     @Column(name = "wachtwoord")
+    @Size(min = 6)
     private String wachtwoord;
 
     public Klant() {
