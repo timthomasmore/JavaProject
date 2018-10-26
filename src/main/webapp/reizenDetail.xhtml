@@ -11,11 +11,13 @@
 <body>
 <ui:composition template = "templates/templ.xhtml">
     <ui:define name = "content">
-        <h:link value="Terug naar overzicht" outcome="reizenOverzicht"></h:link> <br />
+        <h:link value="Terug naar overzicht" outcome="reizenOverzicht"></h:link> <br /><br />
         Id: <h:outputText value="#{reizenController.reis.id}" /><br />
         Prijs: <h:outputText value="#{reizenController.reis.prijs}" /><br />
         Bestemming: <h:outputText value="#{reizenController.reis.bestemmingLocatieId}" /><br />
-        Vertrek: <h:outputText value="#{reizenController.reis.vertrekDatum}" /><br />
+        Voertuig id: <h:outputText value="#{reizenController.reis.vertrekDatum}" /><br />
+        Vertrek datum: <h:outputText value="#{reizenController.reis.transportMiddelId}" /><br />
+        Vertrek uur: <h:outputText value="#{reizenController.reis.vertrekUur}" /><br />
     </ui:define>
 </ui:composition>
 </body>
