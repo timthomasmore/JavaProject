@@ -26,9 +26,14 @@
     <nav class="main-blue" role="navigation">
         <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Tropical Travel</a>
             <ul class="right hide-on-med-and-down">
-                <li><h:link outcome="login">Inloggen</h:link>></li>
-                <li>|</li>
-                <li><h:link outcome="register">Registreren</h:link>></li>
+                <h:panelGroup rendered="#{sessionVariables.gebruiker == null}">
+                    <li><h:link outcome="login">inloggen</h:link></li>
+                    <li><h:link outcome="register">registreren</h:link></li>
+                </h:panelGroup>
+                <h:form rendered="#{sessionVariables.gebruiker != null}">
+                    <li><h:outputText value="Welkom #{sessionVariables.gebruiker.voornaam}" /></li>
+                    <li><h:commandLink action="#{klantController.logout}"> Logout </h:commandLink></li>
+                </h:form>
             </ul>
 
             <ul id="nav-mobile" class="sidenav">
