@@ -16,12 +16,7 @@
             <h:outputLabel for="Wachtwoord" value="Wachtwoord:" />
             <p:inputText id="Wachtwoord" value="#{klantController.klant.wachtwoord}"></p:inputText>
             <br/>
-            <h:outputLabel for="Voornaam" value="Voornaam:" />
-            <p:inputText id="Voornaam" value="#{klantController.klant.voornaam}"></p:inputText>
-            <br/>
-            <h:outputLabel for="Achternaam" value="Achternaam:" />
-            <p:inputText id="Achternaam" value="#{klantController.klant.achternaam}"></p:inputText>
-            <h:commandButton value="Register" action="#{klantController.register}"/>
+            <h:commandButton value="Login" action="#{klantController.login}"/>
         </h:panelGrid>
     </p:panel>
 </h:form>
