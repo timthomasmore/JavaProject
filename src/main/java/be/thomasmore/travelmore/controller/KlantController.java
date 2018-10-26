@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.websocket.Session;
 import java.lang.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -36,7 +37,13 @@ public class KlantController {
         return this.klantService.findAllKlanten();
     }
 
+    public String errorMessage;
+
     public String register(){
+        if(!klantService.emailAvailable(klant.getEmail())){
+            return "register";
+        }
+
         klant.setWachtwoord(encrypt(klant.getWachtwoord()));
         this.klantService.insert(klant);
         Singletons.getInstance().setGebruiker(klant);
@@ -58,6 +65,10 @@ public class KlantController {
     public String logout(){
         Singletons.getInstance().setGebruiker(null);
         return "index";
+    }
+
+    public String getErrorMessage(){
+        return errorMessage;
     }
 
 

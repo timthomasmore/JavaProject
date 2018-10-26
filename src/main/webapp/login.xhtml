@@ -7,20 +7,44 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-<h:form id="addLocationForm">
-    <p:panel id="panel" header="Form" style="margin-bottom:10px;">
-        <h:panelGrid columns="6" cellpadding="5">
-            <h:outputLabel for="Email" value="Email:" />
-            <p:inputText id="Email" value="#{klantController.klant.email}"></p:inputText>
-            <br/>
-            <h:outputLabel for="Wachtwoord" value="Wachtwoord:" />
-            <p:inputText id="Wachtwoord" value="#{klantController.klant.wachtwoord}"></p:inputText>
-            <br/>
-            <h:commandButton value="Login" action="#{klantController.login}"/>
-        </h:panelGrid>
-    </p:panel>
-</h:form>
+<ui:composition template="templates/templ.xhtml">
+    <ui:define name="content">
+        <div class="row">
+            <div class="col s12">
+                <h1>Inloggen</h1>
+            </div>
+        </div>
+        <h:form id="addLocationForm">
+            <div class="row">
+                <div class="col m6 s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">mail_outline</i>
+                            <p:inputText id="email" value="#{klantController.klant.email}"></p:inputText>
+                        </div>
+                    </div>
+                </div>
+                <div class="col m6 s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">lock_outline</i>
+                            <h:inputSecret id="wachtwoord" value="#{klantController.klant.wachtwoord}"></h:inputSecret>
+                            <label for="wachtwoord"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <h:commandButton value="Inloggen" action="#{klantController.login}" class="waves-effect waves-light btn text-white"/>
+                    <h:link outcome="index" class="waves-effect waves-light btn ml-1">Annuleren</h:link>
+                </div>
+            </div>
+        </h:form>
 
-<h:link outcome="index">Home</h:link>
+        <h:link outcome="index">Home</h:link>
+
+    </ui:define>
+</ui:composition>
 
 </html>

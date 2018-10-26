@@ -21,6 +21,10 @@ private EntityManager entityManager;
         return entityManager.createNamedQuery(Klant.FIND_BY_EMAIL, Klant.class).setParameter("email", email).getSingleResult();
     }
 
+    public Boolean emailAvailable(String email){
+        return (entityManager.createNamedQuery(Klant.FIND_BY_EMAIL, Klant.class).setParameter("email", email).getResultList().size() == 0);
+    }
+
     public void insert(Klant Klant) {
         entityManager.persist(Klant);
     }
