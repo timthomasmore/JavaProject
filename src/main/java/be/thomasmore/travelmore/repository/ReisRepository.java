@@ -13,4 +13,8 @@ public class ReisRepository {
     public List<Reis> findAll() {
         return entityManager.createNamedQuery(Reis.FIND_ALL, Reis.class).getResultList();
     }
+
+    public Reis findById(int id) {
+        return entityManager.createNamedQuery(Reis.FIND_BY_ID, Reis.class).setParameter("id", id).getSingleResult();
+    }
 }

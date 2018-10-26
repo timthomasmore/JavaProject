@@ -11,8 +11,10 @@
 <body>
 <ui:composition template = "templates/templ.xhtml">
     <ui:define name = "content">
-        <h:outputText value="#{param['id']}" />
-
+        Id: <h:outputText value="#{reizenController.reis.id}" /><br />
+        Prijs: <h:outputText value="#{reizenController.reis.prijs}" /><br />
+        Bestemming: <h:outputText value="#{reizenController.reis.bestemmingLocatieId}" /><br />
+        Vertrek: <h:outputText value="#{reizenController.reis.vertrekDatum}" /><br />
     </ui:define>
 </ui:composition>
 </body>
