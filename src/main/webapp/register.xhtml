@@ -7,6 +7,14 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
+<ui:composition template="templates/templ.xhtml">
+<ui:define name="content">
+<div class="row">
+    <div class="col s12">
+        <h1>Inloggen</h1>
+    </div>
+</div>
+
 <h:form id="addLocationForm">
 
     <h:outputLabel for="Email" value="Email:" />
@@ -36,9 +44,16 @@
     <h:message for="Achternaam" style="color: red"/>
     <br/>
 
-            <h:commandButton value="Register" action="#{klantController.register}"/>
+    <div class="row">
+        <div class="col s12">
+            <h:commandButton value="Register" action="#{klantController.register}" class="waves-effect waves-light btn text-white"/>
+            <h:link outcome="index" class="waves-effect waves-light btn ml-1">Annuleren</h:link>
+</div>
+</div>
 </h:form>
 
-<h:link outcome="index">Home</h:link>
+
+</ui:define>
+</ui:composition>
 
 </html>
