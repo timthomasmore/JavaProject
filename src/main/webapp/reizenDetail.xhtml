@@ -11,6 +11,7 @@
 <body>
 <ui:composition template = "templates/templ.xhtml">
     <ui:define name = "content">
+        <h:link value="Terug naar overzicht" outcome="reizenOverzicht"></h:link> <br />
         Id: <h:outputText value="#{reizenController.reis.id}" /><br />
         Prijs: <h:outputText value="#{reizenController.reis.prijs}" /><br />
         Bestemming: <h:outputText value="#{reizenController.reis.bestemmingLocatieId}" /><br />
