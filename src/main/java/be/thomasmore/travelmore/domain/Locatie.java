@@ -2,6 +2,9 @@ package be.thomasmore.travelmore.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "locatie")
@@ -17,17 +20,20 @@ import javax.validation.constraints.Size;
                 )
         }
 )
-public class Locatie {
+public class Locatie implements Serializable {
     public static final String FIND_ALL = "Locatie.findAll";
     public static final String FIND_BY_CODE = "Locatie.findByCode";
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(name = "naam")
     private String naam;
     @Column(name = "code")
-    @Size(min=3, max = 5)
+    @Size(min=3, max = 10)
     private String code;
+    @OneToMany(mappedBy="bestemmingLocatie")
+    private List<Reis> reizen = new ArrayList<Reis>();
 
     public Locatie() {
     }

@@ -1,6 +1,7 @@
 package be.thomasmore.travelmore.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "reis")
@@ -13,15 +14,16 @@ import javax.persistence.*;
         }
 )
 
-public class Reis {
+public class Reis implements Serializable {
     public static final String FIND_ALL = "Reis.findAll";
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(name = "vertrekLocatieId")
     private int vertrekLocatieId;
     @Column(name = "bestemmingLocatieId")
-    private int bestemmingLocatieId;
+    private int bestemmingLocatie_Id;
     @Column(name = "prijs")
     private double prijs;
     @Column(name = "transportMiddelId")
@@ -30,6 +32,10 @@ public class Reis {
     private String vertrekDatum;
     @Column(name = "vertrekUur")
     private String vertrekUur;
+    @ManyToOne
+    private Locatie bestemmingLocatie;
+
+
 
     public Reis() {
     }
@@ -51,11 +57,11 @@ public class Reis {
     }
 
     public int getBestemmingLocatieId() {
-        return bestemmingLocatieId;
+        return bestemmingLocatie_Id;
     }
 
     public void setBestemmingLocatieId(int bestemmingLocatieId) {
-        this.bestemmingLocatieId = bestemmingLocatieId;
+        this.bestemmingLocatie_Id = bestemmingLocatieId;
     }
 
     public double getPrijs() {
@@ -88,5 +94,13 @@ public class Reis {
 
     public void setVertrekUur(String vertrekUur) {
         this.vertrekUur = vertrekUur;
+    }
+
+    public Locatie getBestemmingLocatie() {
+        return bestemmingLocatie;
+    }
+
+    public void setBestemmingLocatie(Locatie bestemmingLocatie) {
+        this.bestemmingLocatie = bestemmingLocatie;
     }
 }
