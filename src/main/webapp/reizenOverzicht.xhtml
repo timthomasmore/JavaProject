@@ -15,9 +15,7 @@
         <h:link value="reizenOverzicht" outcome="reizenOverzicht"></h:link>
         <p:dataTable var="reis" value="#{reizenController.reizen}" id="locationDataTable">
             <p:column headerText="Details">
-                <h:link value="details" outcome="reizenDetail" >
-                    <f:param name="id" value="#{reis.id}" />
-                </h:link>
+                <h:form><h:commandLink value="details" action="#{reizenController.getReisById(reis.id)}" /></h:form>
             </p:column>
             <p:column headerText="Id">
                 <h:outputText value="#{reis.id}" />

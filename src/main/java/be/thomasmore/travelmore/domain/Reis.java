@@ -9,12 +9,17 @@ import javax.persistence.*;
                 @NamedQuery(
                         name = Reis.FIND_ALL,
                         query = "SELECT r FROM Reis r"
+                ),
+                @NamedQuery(
+                        name = Reis.FIND_BY_ID,
+                        query = "SELECT r FROM Reis r WHERE r.id = :id"
                 )
         }
 )
 
 public class Reis {
     public static final String FIND_ALL = "Reis.findAll";
+    public static final String FIND_BY_ID = "Reis.findById";
 
     @Id
     private int id;

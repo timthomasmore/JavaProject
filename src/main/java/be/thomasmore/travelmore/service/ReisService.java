@@ -15,4 +15,5 @@ public class ReisService {
     public List<Reis> findAllReizen(){
         return reisRepository.findAll();
     }
+    public Reis findById(int id){return reisRepository.findById(id);}
 }
