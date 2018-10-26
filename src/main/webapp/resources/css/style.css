@@ -17,3 +17,15 @@
 .background-beige {
     background-color: #EAE7DC !important;
 }
+
+/* Start Sticky Footer */
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+/* End Sticky Footer */
