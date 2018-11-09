@@ -19,10 +19,16 @@ public class AuthenticationService implements Serializable {
 
     private Klant klant;
 
+    private String confirmpass;
+
     public void login(Klant klant){
         if(!isLoggedIn()){
             this.klant = klant;
         }
+    }
+
+    public Boolean confirm(String pass){
+        return (pass.equals(confirmpass));
     }
 
     public void logout(){
@@ -35,5 +41,13 @@ public class AuthenticationService implements Serializable {
 
     public Klant getKlant(){
         return klant;
+    }
+
+    public void setConfirmpass(String confirmpass) {
+        this.confirmpass = confirmpass;
+    }
+
+    public String getConfirmpass() {
+        return confirmpass;
     }
 }

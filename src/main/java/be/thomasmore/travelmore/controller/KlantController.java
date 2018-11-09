@@ -41,17 +41,19 @@ public class KlantController {
     public String errorMessage;
 
     public String register(){
+        if(!klantService.emailAvailable(klant.getEmail())){
+            errorMessage = "Het opgegeven email adress bestaat al.";
+            return "";
+        }
+        if(!authenticationService.confirm(klant.getWachtwoord())){
+            errorMessage = "het bevestigingswachtwoord komt niet overeen met het wachtwoord";
+            return "";
+        }
+
         klant.setWachtwoord(encrypt(klant.getWachtwoord()));
-        try {
             this.klantService.insert(klant);
             authenticationService.login(klant);
             return "index";
-        } catch (AlreadyExistException e) {
-            e.printStackTrace();
-            errorMessage = "Het opgegeven email adress bestaat al.";
-        }
-
-        return "";
 
     }
 

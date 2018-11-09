@@ -34,6 +34,10 @@
     <h:message for="Wachtwoord" style="color: red"/>
 
     <br/>
+    <h:outputLabel for="ConfirmWachtwoord" value="Bevestig Wachtwoord:" />
+    <h:inputSecret id="ConfirmWachtwoord" value="#{authenticationService.confirmpass}"></h:inputSecret>
+
+    <br/>
     <h:outputLabel for="Voornaam" value="Voornaam:" />
     <p:inputText id="Voornaam" value="#{klantController.klant.voornaam}" ></p:inputText>
     <br/>

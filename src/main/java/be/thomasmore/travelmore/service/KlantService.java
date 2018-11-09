@@ -27,13 +27,8 @@ public class KlantService {
 
     public Boolean emailAvailable (String email) {return KlantRepository.emailAvailable(email);}
 
-    public void insert(Klant klant) throws AlreadyExistException {
-        if(emailAvailable(klant.getEmail())){
+    public void insert(Klant klant){
             KlantRepository.insert(klant);
-        }
-        else {
-            throw new AlreadyExistException("There is already a user with this email address");
-        }
     }
 
 }
