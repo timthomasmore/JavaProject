@@ -24,6 +24,7 @@ public class Klant {
     public static final String FIND_BY_EMAIL = "Klant.findByEmail";
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(name = "voornaam")
     @Size(min = 1, message = "gelieve een voornaam in te geven")
