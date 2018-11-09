@@ -30,13 +30,16 @@ public class BoekingController {
     public String boekReis(int betaalmethode, Reis reis) {
         // Send email
         String to = authService.getKlant().getEmail();
-        String body = "Beste " + authService.getKlant().getVoornaam();
-        body += "\n\nHierbij bevestigen wij uw boeking van onderstaande reis:";
-        body += "\n\nHier komt de reis";
+        String body = "Dag " + authService.getKlant().getVoornaam() + "!";
+        body += "\n\nHierbij bevestigen wij jouw boeking van onderstaande reis:";
+        body += "\n\nJe vertrekt vanuit: " + reis.getVertrekLocatie().getNaam() + ".";
+        body += "\nJe bestemming is: " + reis.getBestemmingLocatie().getNaam() + ".";
+        body += "\nJe vertrekt om " + reis.getVertrekUur() + " op " + reis.getVertrekDatum() + ".";
+        body += "\nJe vervoersmiddel is: " + reis.getTransportMiddel().getNaam() + ".";
         body += "\n\nGoede reis!";
         body += "\nMet vriendelijke groeten";
         body += "\n\nTropical Travel";
-        sendMail(to, "Bevestiging", "U hebt bevestigd!");
+        sendMail(to, "Bevestiging", body);
 
         return "boekingBevestiging";
     }

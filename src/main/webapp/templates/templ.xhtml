@@ -23,32 +23,35 @@
     <link rel="stylesheet" href="resources/css/style.css"/>
 </h:head>
 <h:body class="background-beige">
-    <nav class="main-blue" role="navigation">
-        <div class="nav-wrapper container"><h:link outcome="index" id="logo-container" class="brand-logo">Tropical Travel</h:link>
-            <ul class="right hide-on-med-and-down">
-                <h:panelGroup rendered="#{!authenticationService.loggedIn}">
-                    <li><h:link outcome="login">inloggen</h:link></li>
-                    <li><h:link outcome="register">registreren</h:link></li>
-                </h:panelGroup>
-                <h:form rendered="#{authenticationService.loggedIn}">
-                    <li><h:outputText value="Welkom #{authenticationService.klant.voornaam}" /></li>
-                   <li><h:commandLink action="#{klantController.logout}"> Logout </h:commandLink></li>
-                </h:form>
-            </ul>
+    <header>
+        <nav class="main-blue" role="navigation">
+            <div class="nav-wrapper container"><h:link outcome="index" id="logo-container"
+                                                       class="brand-logo">Tropical Travel</h:link>
+                <ul class="right hide-on-med-and-down">
+                    <h:panelGroup rendered="#{!authenticationService.loggedIn}">
+                        <li><h:link outcome="login">Aanmelden</h:link></li>
+                        <li><h:link outcome="register">Registreren</h:link></li>
+                    </h:panelGroup>
+                    <h:form rendered="#{authenticationService.loggedIn}">
+                        <li><h:outputText value="Welkom #{authenticationService.klant.voornaam}"/></li>
+                        <li><h:commandLink action="#{klantController.logout}"> Afmelden </h:commandLink></li>
+                    </h:form>
+                </ul>
 
-            <ul id="nav-mobile" class="sidenav">
-                <li><a href="#">Navbar Link</a></li>
-            </ul>
-            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="sidenav">
+                    <li><a href="#">Navbar Link</a></li>
+                </ul>
+                <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="section">
+                <ui:insert name="content"></ui:insert>
+            </div>
         </div>
-    </nav>
-
-    <div class="container">
-        <div class="section">
-            <ui:insert name="content"></ui:insert>
-        </div>
-    </div>
-
+    </main>
     <footer class="page-footer main-light-blue">
         <div class="container">
             <div class="row">
