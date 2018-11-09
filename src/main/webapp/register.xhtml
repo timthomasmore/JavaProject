@@ -16,6 +16,8 @@
 </div>
 
 <h:form id="addLocationForm">
+    <h:outputText value="#{klantController.errorMessage}" rendered="#{klantController.errorMessage != null}" style="color: red" />
+    <br/>
 
     <h:outputLabel for="Email" value="Email:" />
     <p:inputText id="Email" value="#{klantController.klant.email}"></p:inputText>
