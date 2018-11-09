@@ -16,6 +16,8 @@
         </div>
         <h:form id="addLocationForm">
             <div class="row">
+                <h:outputText value="#{klantController.errorMessage}" rendered="#{klantController.errorMessage != null}" style="color: red" />
+                <br/>
                 <div class="col m6 s12">
                     <div class="row">
                         <div class="input-field col s12">

@@ -8,53 +8,54 @@
       xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="templates/templ.xhtml">
-    <ui:define name="content">
-        <div class="row">
-            <div class="col s12">
-                <h1>Inloggen</h1>
-            </div>
-        </div>
+<ui:define name="content">
+<div class="row">
+    <div class="col s12">
+        <h1>Inloggen</h1>
+    </div>
+</div>
 
-        <h:form id="addLocationForm">
+<h:form id="addLocationForm">
+    <h:outputText value="#{klantController.errorMessage}" rendered="#{klantController.errorMessage != null}" style="color: red" />
+    <br/>
 
-            <h:outputLabel for="Email" value="Email:"/>
-            <p:inputText id="Email" value="#{klantController.klant.email}"></p:inputText>
-            <br/>
+    <h:outputLabel for="Email" value="Email:" />
+    <p:inputText id="Email" value="#{klantController.klant.email}"></p:inputText>
+    <br/>
 
-            <h:message for="Email" style="color: red"/>
+    <h:message for="Email" style="color: red"/>
 
-            <br/>
-            <h:outputLabel for="Wachtwoord" value="Wachtwoord:"/>
-            <h:inputSecret id="Wachtwoord" value="#{klantController.klant.wachtwoord}"></h:inputSecret>
-
-
-            <br/>
-            <h:message for="Wachtwoord" style="color: red"/>
-
-            <br/>
-            <h:outputLabel for="Voornaam" value="Voornaam:"/>
-            <p:inputText id="Voornaam" value="#{klantController.klant.voornaam}"></p:inputText>
-            <br/>
-
-            <h:message for="Voornaam" style="color: red"/>
-            <br/>
-            <h:outputLabel for="Achternaam" value="Achternaam:"/>
-            <p:inputText id="Achternaam" value="#{klantController.klant.achternaam}"></p:inputText>
-            <br/>
-            <h:message for="Achternaam" style="color: red"/>
-            <br/>
-
-            <div class="row">
-                <div class="col s12">
-                    <h:commandButton value="Register" action="#{klantController.register}"
-                                     class="waves-effect waves-light btn text-white"/>
-                    <h:link outcome="index" class="waves-effect waves-light btn ml-1">Annuleren</h:link>
-                </div>
-            </div>
-        </h:form>
+    <br/>
+    <h:outputLabel for="Wachtwoord" value="Wachtwoord:" />
+    <h:inputSecret id="Wachtwoord" value="#{klantController.klant.wachtwoord}"></h:inputSecret>
 
 
-    </ui:define>
+    <br/>
+    <h:message for="Wachtwoord" style="color: red"/>
+
+    <br/>
+    <h:outputLabel for="Voornaam" value="Voornaam:" />
+    <p:inputText id="Voornaam" value="#{klantController.klant.voornaam}" ></p:inputText>
+    <br/>
+
+    <h:message for="Voornaam" style="color: red"/>
+    <br/>
+    <h:outputLabel for="Achternaam" value="Achternaam:" />
+    <p:inputText id="Achternaam" value="#{klantController.klant.achternaam}"></p:inputText>
+    <br/>
+    <h:message for="Achternaam" style="color: red"/>
+    <br/>
+
+    <div class="row">
+        <div class="col s12">
+            <h:commandButton value="Register" action="#{klantController.register}" class="waves-effect waves-light btn text-white"/>
+            <h:link outcome="index" class="waves-effect waves-light btn ml-1">Annuleren</h:link>
+</div>
+</div>
+</h:form>
+
+
+</ui:define>
 </ui:composition>
 
 </html>

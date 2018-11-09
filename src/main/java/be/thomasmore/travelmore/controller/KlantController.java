@@ -1,16 +1,14 @@
 package be.thomasmore.travelmore.controller;
 
 import be.thomasmore.travelmore.domain.Klant;
+import be.thomasmore.travelmore.exceptions.AlreadyExistException;
 import be.thomasmore.travelmore.service.KlantService;
-import be.thomasmore.travelmore.utility.SessionVariables;
-import be.thomasmore.travelmore.utility.Singletons;
+import be.thomasmore.travelmore.utility.AuthenticationService;
 
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
-import javax.inject.Singleton;
-import javax.websocket.Session;
 import java.lang.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -19,6 +17,9 @@ import java.util.List;
 @ManagedBean
 @ViewScoped
 public class KlantController {
+
+    @Inject
+    private AuthenticationService authenticationService;
 
     @Inject
     private KlantService klantService;
@@ -40,14 +41,17 @@ public class KlantController {
     public String errorMessage;
 
     public String register(){
-        if(!klantService.emailAvailable(klant.getEmail())){
-            return "register";
+        klant.setWachtwoord(encrypt(klant.getWachtwoord()));
+        try {
+            this.klantService.insert(klant);
+            authenticationService.login(klant);
+            return "index";
+        } catch (AlreadyExistException e) {
+            e.printStackTrace();
+            errorMessage = "Het opgegeven email adress bestaat al.";
         }
 
-        klant.setWachtwoord(encrypt(klant.getWachtwoord()));
-        this.klantService.insert(klant);
-        Singletons.getInstance().setGebruiker(klant);
-        return "index";
+        return "";
 
     }
 
@@ -55,15 +59,15 @@ public class KlantController {
         Klant bestaandeklant = klantService.findKlantByEmail(klant.getEmail());
 
         if(verify(klant.getWachtwoord(),bestaandeklant.getWachtwoord())){
-            Singletons.getInstance().setGebruiker(bestaandeklant);
-            System.out.println(Singletons.getInstance().getGebruiker());
+            authenticationService.login(bestaandeklant);
             return "index";
         }
+        errorMessage = "De ingevulde gegevens kloppen niet";
         return "login";
     }
 
     public String logout(){
-        Singletons.getInstance().setGebruiker(null);
+        authenticationService.logout();
         return "index";
     }
 
