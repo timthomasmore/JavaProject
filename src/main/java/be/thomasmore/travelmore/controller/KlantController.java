@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 import java.lang.*;
 import java.security.MessageDigest;
@@ -39,31 +40,31 @@ public class KlantController {
 
     public String errorMessage;
 
-    public String register(){
+    public String register(HttpSession session){
         if(!klantService.emailAvailable(klant.getEmail())){
             return "register";
         }
 
         klant.setWachtwoord(encrypt(klant.getWachtwoord()));
         this.klantService.insert(klant);
-        Singletons.getInstance().setGebruiker(klant);
+        setgebruiker(session);
         return "index";
 
     }
 
-    public String login(){
+    public String login(HttpSession session){
         Klant bestaandeklant = klantService.findKlantByEmail(klant.getEmail());
 
         if(verify(klant.getWachtwoord(),bestaandeklant.getWachtwoord())){
-            Singletons.getInstance().setGebruiker(bestaandeklant);
-            System.out.println(Singletons.getInstance().getGebruiker());
+            setgebruiker(session);
             return "index";
         }
+
         return "login";
     }
 
-    public void gebruikerinsession(){
-        
+    public void setgebruiker(HttpSession session){
+        session.setAttribute("gebruiker",klant);
     }
 
     public String logout(){
