@@ -19,6 +19,9 @@
         Voertuig id: <h:outputText value="#{reizenController.reis.transportMiddel.naam}" /> <br />
         Vertrek datum: <h:outputText value="#{reizenController.reis.vertrekDatum}" /><br />
         Vertrek uur: <h:outputText value="#{reizenController.reis.vertrekUur}" /><br />
+        <h:form><h:commandLink value="Betalen met Bancontact" action="#{boekingController.boekReis(1, reizenController.reis)}" /></h:form>
+        <h:form><h:commandLink value="Betalen met VISA" action="#{boekingController.boekReis(2, reizenController.reis)}" /></h:form>
+        <h:form><h:commandLink value="Betalen met PayPal" action="#{boekingController.boekReis(3, reizenController.reis)}" /></h:form>
     </ui:define>
 </ui:composition>
 </body>
