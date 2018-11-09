@@ -6,6 +6,7 @@ import be.thomasmore.travelmore.service.ReisService;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
+import java.util.Iterator;
 import java.util.List;
 
 @ManagedBean
@@ -24,8 +25,15 @@ public class ReizenController {
         this.reis = reis;
     }
 
-    public List<Reis> getReizen(){
-        return this.reisService.findAllReizen();
+    public List<Reis> getReizen() {
+        List<Reis> reizen = this.reisService.findAllReizen();
+        // Datum en uur formatteren
+        for (Reis reis : reizen) {
+            reis.setVertrekUur(reis.getVertrekUur().substring(0, 2) + "u" + reis.getVertrekUur().substring(3, 5));
+            String[] parts = reis.getVertrekDatum().split("-");
+            reis.setVertrekDatum(parts[2] + "/" + parts[1] + "/" + parts[0]);
+        }
+        return reizen;
     }
 
     public String getReisById(int id) {
