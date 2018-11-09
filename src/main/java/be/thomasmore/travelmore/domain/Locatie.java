@@ -33,7 +33,9 @@ public class Locatie implements Serializable {
     @Size(min=3, max = 10)
     private String code;
     @OneToMany(mappedBy="bestemmingLocatie")
-    private List<Reis> reizen = new ArrayList<Reis>();
+    private List<Reis> reizenBestemming = new ArrayList<Reis>();
+    @OneToMany(mappedBy="vertrekLocatie")
+    private List<Reis> reizenVertrek = new ArrayList<Reis>();
 
     public Locatie() {
     }
