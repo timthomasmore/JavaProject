@@ -16,6 +16,7 @@
         </div>
         <h:form id="addLocationForm">
             <div class="row">
+                <br/>
                 <h:outputText value="#{klantController.errorMessage}" rendered="#{klantController.errorMessage != null}" style="color: red" />
                 <br/>
                 <div class="col m6 s12">
@@ -23,6 +24,8 @@
                         <div class="input-field col s12">
                             <i class="material-icons prefix">mail_outline</i>
                             <p:inputText id="email" value="#{klantController.klant.email}"></p:inputText>
+                            <br/>
+                            <h:message for="email" style="color: red"/>
                         </div>
                     </div>
                 </div>
@@ -32,6 +35,8 @@
                             <i class="material-icons prefix">lock_outline</i>
                             <h:inputSecret id="wachtwoord" value="#{klantController.klant.wachtwoord}"></h:inputSecret>
                             <label for="wachtwoord"></label>
+                            <br/>
+                            <h:message for="wachtwoord" style="color: red"/>
                         </div>
                     </div>
                 </div>
@@ -43,8 +48,6 @@
                 </div>
             </div>
         </h:form>
-
-        <h:link outcome="index">Home</h:link>
 
     </ui:define>
 </ui:composition>

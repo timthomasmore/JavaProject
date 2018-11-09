@@ -56,14 +56,22 @@ public class KlantController {
     }
 
     public String login(){
-        Klant bestaandeklant = klantService.findKlantByEmail(klant.getEmail());
+        Klant bestaandeklant = new Klant();
+           try {
+               bestaandeklant = klantService.findKlantByEmail(klant.getEmail());
+           } catch (Exception e){
+               errorMessage = "De ingevulde gegevens kloppen niet";
+               return "";
+           }
+
+
 
         if(verify(klant.getWachtwoord(),bestaandeklant.getWachtwoord())){
             authenticationService.login(bestaandeklant);
             return "index";
         }
         errorMessage = "De ingevulde gegevens kloppen niet";
-        return "login";
+        return "";
     }
 
     public String logout(){
