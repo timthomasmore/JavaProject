@@ -1,6 +1,6 @@
 SET GLOBAL time_zone = '+01:00';
 
-/*INSERT INTO `klant` (`id`, `voornaam`, `achternaam`, `email`, `wachtwoord`)
+INSERT INTO `klant` (`id`, `voornaam`, `achternaam`, `email`, `wachtwoord`)
 VALUES (1, 'Alexander', 'V', 'alexander.v@gmail.com', 'test1'),
        (2, 'Marie', 'B', 'marie.b@gmail.com', 'test2'),
        (3, 'Stef', 'DC', 'stef.dc@gmail.com', 'test3'),
@@ -20,7 +20,7 @@ VALUES (1, 'Verenigd Koninkrijk', 'VK153-6'),
        (2, 'Andorra', 'AD-4'),
        (3, 'Kamping Kitsch', 'MARG1N44-L'),
        (4, 'Turkije', 'TK-87'),
-       (5, 'De zee. Spannend.', 'ZEEKE');*/
+       (5, 'De zee. Spannend.', 'ZEEKE');
 
 INSERT INTO `boeking` (`id`, `klantId`, `prijs`, `isBetaald`, `heenReisId`, `terugReisId`)
 VALUES (1, 1, 567.89, TRUE, 1, 2),

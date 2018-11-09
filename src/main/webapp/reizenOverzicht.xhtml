@@ -13,7 +13,7 @@
 <ui:composition template = "templates/templ.xhtml">
     <ui:define name = "content">
         <h:link value="reizenOverzicht" outcome="reizenOverzicht"></h:link>
-        <p:dataTable var="reis" value="#{reizenController.reizen}" id="locationDataTable">
+        <p:dataTable var="reis" value="#{reizenController.getReizen()}" id="locationDataTable">
             <p:column headerText="Details">
                 <h:form><h:commandLink value="details" action="#{reizenController.getReisById(reis.id)}" /></h:form>
             </p:column>
@@ -21,20 +21,20 @@
                 <h:outputText value="#{reis.id}" />
             </p:column>
 
-            <p:column headerText="Vertrek locatie id">
-                <h:outputText value="#{reis.vertrekLocatieId}" />
+            <p:column headerText="Vertrek">
+                <h:outputText value="#{reis.vertrekLocatie.naam}" />
             </p:column>
 
-            <p:column headerText="Bestemming locatie id">
-                <h:outputText value="#{reis.bestemmingLocatieId}" />
+            <p:column headerText="Bestemming">
+                <h:outputText value="#{reis.bestemmingLocatie.naam}" />
             </p:column>
 
             <p:column headerText="Prijs">
                 <h:outputText value="#{reis.prijs}" />
             </p:column>
 
-            <p:column headerText="Transport middel Id">
-                <h:outputText value="#{reis.transportMiddelId}" />
+            <p:column headerText="Transport">
+                <h:outputText value="#{reis.transportMiddel.naam}" />
             </p:column>
 
             <p:column headerText="Vertrek Datum">
