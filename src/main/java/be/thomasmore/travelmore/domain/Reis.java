@@ -42,7 +42,6 @@ public class Reis implements Serializable {
     private Transportmiddel transportMiddel;
 
 
-
     public Reis() {
     }
 

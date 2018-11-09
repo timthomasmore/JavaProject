@@ -13,38 +13,31 @@
 <ui:composition template = "templates/templ.xhtml">
     <ui:define name = "content">
         <h:link value="Terug" outcome="index"></h:link>
-        <p:dataTable var="reis" value="#{reizenController.getReizen()}" id="locationDataTable">
-            <p:column headerText="Details">
-                <h:form><h:commandLink value="details" action="#{reizenController.getReisById(reis.id)}" /></h:form>
-            </p:column>
-            <p:column headerText="Id">
-                <h:outputText value="#{reis.id}" />
-            </p:column>
 
-            <p:column headerText="Vertrek">
-                <h:outputText value="#{reis.vertrekLocatie.naam}" />
-            </p:column>
-
-            <p:column headerText="Bestemming">
-                <h:outputText value="#{reis.bestemmingLocatie.naam}" />
-            </p:column>
-
-            <p:column headerText="Prijs">
-                <h:outputText value="#{reis.prijs}" />
-            </p:column>
-
-            <p:column headerText="Transport">
-                <h:outputText value="#{reis.transportMiddel.naam}" />
-            </p:column>
-
-            <p:column headerText="Vertrek Datum">
-                <h:outputText value="#{reis.vertrekDatum}" />
-            </p:column>
-
-            <p:column headerText="Vertrek uur">
-                <h:outputText value="#{reis.vertrekUur}" />
-            </p:column>
-        </p:dataTable>
+        <h:dataTable value="#{reizenController.getReizen()}" var="reis" styleClass="table">
+            <h:column>
+                <f:facet name="header">Datum</f:facet>
+                #{reis.vertrekDatum} <br />
+                #{reis.vertrekUur}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Info</f:facet>
+                #{reis.vertrekLocatie.naam} <i class="fas fa-long-arrow-alt-right"></i>  #{reis.bestemmingLocatie.naam}<br />
+                    Transportmiddel: #{reis.transportMiddel.naam}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Prijs</f:facet>
+                #{reis.prijs}
+            </h:column>
+            <h:column rendered="#{!authenticationService.loggedIn}">
+                <f:facet name="header"></f:facet>
+                <h:link outcome="login">Aanmelden</h:link>
+            </h:column>
+            <h:column rendered="#{authenticationService.loggedIn}">
+                <f:facet name="header"></f:facet>
+                <h:form><h:commandLink value="Boeken" action="#{reizenController.getReisById(reis.id)}" /></h:form>
+            </h:column>
+        </h:dataTable>
 
     </ui:define>
 </ui:composition>
