@@ -12,7 +12,7 @@
 <body>
 <ui:composition template = "templates/templ.xhtml">
     <ui:define name = "content">
-        <h:link value="reizenOverzicht" outcome="reizenOverzicht"></h:link>
+        <h:link value="Terug" outcome="index"></h:link>
         <p:dataTable var="reis" value="#{reizenController.getReizen()}" id="locationDataTable">
             <p:column headerText="Details">
                 <h:form><h:commandLink value="details" action="#{reizenController.getReisById(reis.id)}" /></h:form>
