@@ -62,6 +62,10 @@ public class KlantController {
         return "login";
     }
 
+    public void gebruikerinsession(){
+        
+    }
+
     public String logout(){
         Singletons.getInstance().setGebruiker(null);
         return "index";
