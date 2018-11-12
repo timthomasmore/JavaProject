@@ -12,6 +12,15 @@ import java.io.Serializable;
                         query = "SELECT r FROM Reis r"
                 ),
                 @NamedQuery(
+                        name = Reis.FIND,
+                        query = "SELECT r FROM Reis r" +
+                                " where r.vertrekLocatie.naam = :vertrek" +
+                                " and r.bestemmingLocatie.naam = :bestemming" +
+                                " and r.transportMiddel.maxPlaatsen >= :plaatsen" +
+                                " and r.prijs <= :maxPrijs" +
+                                " and r.transportMiddel.naam = :transportMiddel"
+                ),
+                @NamedQuery(
                         name = Reis.FIND_BY_ID,
                         query = "SELECT r FROM Reis r WHERE r.id = :id"
                 )
@@ -20,6 +29,7 @@ import java.io.Serializable;
 
 public class Reis implements Serializable {
     public static final String FIND_ALL = "Reis.findAll";
+    public static final String FIND = "Reis.find";
     public static final String FIND_BY_ID = "Reis.findById";
 
     @Id

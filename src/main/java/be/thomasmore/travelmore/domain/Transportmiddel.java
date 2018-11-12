@@ -1,14 +1,22 @@
 package be.thomasmore.travelmore.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.inject.Named;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "transportmiddel")
+@NamedQueries(
+        {
+                @NamedQuery(
+                        name = Transportmiddel.FIND_ALL,
+                        query = "SELECT t FROM Transportmiddel t"
+                ),
+        }
+)
 
 public class Transportmiddel {
+    public static final String FIND_ALL = "Transportmiddel.findAll";
 
     @Id
     private int id;
