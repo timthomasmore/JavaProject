@@ -1,7 +1,7 @@
 SET GLOBAL time_zone = '+01:00';
 
 INSERT INTO `klant` (`id`, `voornaam`, `achternaam`, `email`, `wachtwoord`)
-VALUES (1, 'Alexander', 'V', 'alexander.v@gmail.com', 'test1'),
+VALUES (1, 'Alexander', 'V', 'alexander.v@gmail.com', 'test123456'),
        (2, 'Marie', 'B', 'marie.b@gmail.com', 'test2'),
        (3, 'Stef', 'DC', 'stef.dc@gmail.com', 'test3'),
        (4, 'Yannick', 'P', 'yannick.p@gmail.com', 'test4'),

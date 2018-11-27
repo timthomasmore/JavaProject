@@ -66,8 +66,6 @@ public class KlantController {
                return "";
            }
 
-
-
         if(verify(klant.getWachtwoord(),bestaandeklant.getWachtwoord())){
             authenticationService.login(bestaandeklant);
             return "index";
@@ -107,6 +105,4 @@ public class KlantController {
         byte[] byteencryption = encrypted.getBytes();
         return MessageDigest.isEqual(bytepass, byteencryption);
     }
-
-
 }
