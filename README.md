@@ -3,25 +3,25 @@
 
 Auteurs
 ---------------
-Joren Synaeve
-Jordi Bols
-Tim Embrechts
-Michiel Olijslagers
-Tim Van Meerbeeck
+Joren Synaeve <br />
+Jordi Bols <br /> <br />
+Tim Embrechts <br />
+Michiel Olijslagers <br />
+Tim Van Meerbeeck <br />
 
 Specs
 ---------------
-Reizen tussen 2 locaties
-Opzoeken
-Betalen
-Boeken
+Reizen tussen 2 locaties <br />
+Opzoeken <br />
+Betalen <br />
+Boeken <br />
 
 Technologieën
 --------------
-JEE stack
-JEE7
-JSF
-JPA (Hibernate)
-JAX-RS
-Wildfly
-MySQL
+JEE stack <br />
+JEE7 <br />
+JSF <br />
+JPA (Hibernate) <br />
+JAX-RS <br />
+Wildfly <br />
+MySQL <br />
