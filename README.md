@@ -4,7 +4,7 @@
 Auteurs
 ---------------
 Joren Synaeve <br />
-Jordi Bols <br /> <br />
+Jordi Bols <br />
 Tim Embrechts <br />
 Michiel Olijslagers <br />
 Tim Van Meerbeeck <br />
