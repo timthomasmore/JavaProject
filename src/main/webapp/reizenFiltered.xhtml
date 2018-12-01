@@ -14,7 +14,7 @@
     <ui:define name = "content">
         <h:link value="Terug" outcome="index"></h:link>
 
-        <h:dataTable value="#{reizenController.getReizen()}" var="reis" styleClass="table">
+        <h:dataTable value="#{reizenController.reizenFiltered}" var="reis" styleClass="table">
             <h:column>
                 <f:facet name="header">Datum</f:facet>
                 #{reis.vertrekDatum} <br />

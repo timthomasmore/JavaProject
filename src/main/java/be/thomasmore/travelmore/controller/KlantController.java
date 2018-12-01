@@ -1,16 +1,14 @@
 package be.thomasmore.travelmore.controller;
 
 import be.thomasmore.travelmore.domain.Klant;
+import be.thomasmore.travelmore.exceptions.AlreadyExistException;
 import be.thomasmore.travelmore.service.KlantService;
-import be.thomasmore.travelmore.utility.SessionVariables;
-import be.thomasmore.travelmore.utility.Singletons;
+import be.thomasmore.travelmore.utility.AuthenticationService;
 
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
-import javax.inject.Singleton;
-import javax.websocket.Session;
 import java.lang.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -19,6 +17,9 @@ import java.util.List;
 @ManagedBean
 @ViewScoped
 public class KlantController {
+
+    @Inject
+    private AuthenticationService authenticationService;
 
     @Inject
     private KlantService klantService;
@@ -41,29 +42,40 @@ public class KlantController {
 
     public String register(){
         if(!klantService.emailAvailable(klant.getEmail())){
-            return "register";
+            errorMessage = "Het opgegeven email adress bestaat al.";
+            return "";
+        }
+        if(!authenticationService.confirm(klant.getWachtwoord())){
+            errorMessage = "het bevestigingswachtwoord komt niet overeen met het wachtwoord";
+            return "";
         }
 
         klant.setWachtwoord(encrypt(klant.getWachtwoord()));
-        this.klantService.insert(klant);
-        Singletons.getInstance().setGebruiker(klant);
-        return "index";
+            this.klantService.insert(klant);
+            authenticationService.login(klant);
+            return "index";
 
     }
 
     public String login(){
-        Klant bestaandeklant = klantService.findKlantByEmail(klant.getEmail());
+        Klant bestaandeklant = new Klant();
+           try {
+               bestaandeklant = klantService.findKlantByEmail(klant.getEmail());
+           } catch (Exception e){
+               errorMessage = "De ingevulde gegevens kloppen niet";
+               return "";
+           }
 
         if(verify(klant.getWachtwoord(),bestaandeklant.getWachtwoord())){
-            Singletons.getInstance().setGebruiker(bestaandeklant);
-            System.out.println(Singletons.getInstance().getGebruiker());
+            authenticationService.login(bestaandeklant);
             return "index";
         }
-        return "login";
+        errorMessage = "De ingevulde gegevens kloppen niet";
+        return "";
     }
 
     public String logout(){
-        Singletons.getInstance().setGebruiker(null);
+        authenticationService.logout();
         return "index";
     }
 
@@ -93,6 +105,4 @@ public class KlantController {
         byte[] byteencryption = encrypted.getBytes();
         return MessageDigest.isEqual(bytepass, byteencryption);
     }
-
-
 }

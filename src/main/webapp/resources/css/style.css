@@ -35,3 +35,11 @@ main {
     margin-left: 1rem;
 }
 /* End Margins */
+
+a.footerlink:hover {
+    text-decoration: underline;
+}
+
+html {
+    color: #333333;
+}

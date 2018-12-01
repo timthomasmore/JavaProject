@@ -12,8 +12,9 @@ public class ReisService {
     @Inject
     private ReisRepository reisRepository;
 
-    public List<Reis> findAllReizen(){
-        return reisRepository.findAll();
+    public List<Reis> findAllReizen(){return reisRepository.findAll();}
+    public List<Reis> findReizen(String vertrek, String bestemming, int plaatsen, double maxPrijs, String transportmiddel){
+        return reisRepository.find(vertrek, bestemming, plaatsen, maxPrijs, transportmiddel);
     }
     public Reis findById(int id){return reisRepository.findById(id);}
 }

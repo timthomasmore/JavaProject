@@ -4,6 +4,7 @@ import be.thomasmore.travelmore.domain.Reis;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Date;
 import java.util.List;
 
 public class ReisRepository {
@@ -12,6 +13,16 @@ public class ReisRepository {
 
     public List<Reis> findAll() {
         return entityManager.createNamedQuery(Reis.FIND_ALL, Reis.class).getResultList();
+    }
+
+    public List<Reis> find(String vertrek, String bestemming, int plaatsen, double maxPrijs, String transportmiddel) {
+        return entityManager.createNamedQuery(Reis.FIND, Reis.class)
+                .setParameter("vertrek", vertrek)
+                .setParameter("bestemming", bestemming)
+                .setParameter("plaatsen", plaatsen)
+                .setParameter("maxPrijs", maxPrijs)
+                .setParameter("transportMiddel", transportmiddel)
+                .getResultList();
     }
 
     public Reis findById(int id) {

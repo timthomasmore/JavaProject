@@ -1,6 +1,7 @@
 package be.thomasmore.travelmore.service;
 
 import be.thomasmore.travelmore.domain.Klant;
+import be.thomasmore.travelmore.exceptions.AlreadyExistException;
 import be.thomasmore.travelmore.repository.KlantRepository;
 
 import javax.ejb.Stateless;
@@ -26,8 +27,8 @@ public class KlantService {
 
     public Boolean emailAvailable (String email) {return KlantRepository.emailAvailable(email);}
 
-    public void insert(Klant Klant) {
-        KlantRepository.insert(Klant);
+    public void insert(Klant klant){
+            KlantRepository.insert(klant);
     }
 
 }

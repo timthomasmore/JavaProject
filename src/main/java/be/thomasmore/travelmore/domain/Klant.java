@@ -24,6 +24,7 @@ public class Klant {
     public static final String FIND_BY_EMAIL = "Klant.findByEmail";
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(name = "voornaam")
     @Size(min = 1, message = "gelieve een voornaam in te geven")
@@ -33,7 +34,7 @@ public class Klant {
     private String achternaam;
     @Column(name = "email")
     @Size(min = 1,message = "gelieve een email addres in te geven")
-    @Pattern(regexp = "[A-z]+@[A-z]+.[A-z]+",message = "Gelieve een geldig email addres in te geven")
+    //@Pattern(regexp = ".*+@+\\w+.+\\w",message = "Gelieve een geldig email addres in te geven")
     private String email;
     @Column(name = "wachtwoord")
     @Size(min = 6, message = "Gelieve een wachtwoord van meer dan 6 characters in te geven")

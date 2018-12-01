@@ -12,6 +12,15 @@ import java.io.Serializable;
                         query = "SELECT r FROM Reis r"
                 ),
                 @NamedQuery(
+                        name = Reis.FIND,
+                        query = "SELECT r FROM Reis r" +
+                                " where r.vertrekLocatie.naam = :vertrek" +
+                                " and r.bestemmingLocatie.naam = :bestemming" +
+                                " and r.transportMiddel.maxPlaatsen >= :plaatsen" +
+                                " and r.prijs <= :maxPrijs" +
+                                " and r.transportMiddel.naam = :transportMiddel"
+                ),
+                @NamedQuery(
                         name = Reis.FIND_BY_ID,
                         query = "SELECT r FROM Reis r WHERE r.id = :id"
                 )
@@ -20,26 +29,27 @@ import java.io.Serializable;
 
 public class Reis implements Serializable {
     public static final String FIND_ALL = "Reis.findAll";
+    public static final String FIND = "Reis.find";
     public static final String FIND_BY_ID = "Reis.findById";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column(name = "vertrekLocatieId")
-    private int vertrekLocatieId;
-    @Column(name = "bestemmingLocatieId")
-    private int bestemmingLocatie_Id;
     @Column(name = "prijs")
     private double prijs;
-    @Column(name = "transportMiddelId")
-    private int transportMiddelId;
     @Column(name = "vertrekDatum")
     private String vertrekDatum;
     @Column(name = "vertrekUur")
     private String vertrekUur;
     @ManyToOne
+    @JoinColumn(name = "bestemmingLocatieId")
     private Locatie bestemmingLocatie;
-
+    @ManyToOne
+    @JoinColumn(name = "vertrekLocatieId")
+    private Locatie vertrekLocatie;
+    @ManyToOne
+    @JoinColumn(name = "transportMiddelId")
+    private Transportmiddel transportMiddel;
 
 
     public Reis() {
@@ -53,36 +63,12 @@ public class Reis implements Serializable {
         this.id = id;
     }
 
-    public int getVertrekLocatieId() {
-        return vertrekLocatieId;
-    }
-
-    public void setVertrekLocatieId(int vertrekLocatieId) {
-        this.vertrekLocatieId = vertrekLocatieId;
-    }
-
-    public int getBestemmingLocatieId() {
-        return bestemmingLocatie_Id;
-    }
-
-    public void setBestemmingLocatieId(int bestemmingLocatieId) {
-        this.bestemmingLocatie_Id = bestemmingLocatieId;
-    }
-
     public double getPrijs() {
         return prijs;
     }
 
     public void setPrijs(double prijs) {
         this.prijs = prijs;
-    }
-
-    public int getTransportMiddelId() {
-        return transportMiddelId;
-    }
-
-    public void setTransportMiddelId(int transportMiddelId) {
-        this.transportMiddelId = transportMiddelId;
     }
 
     public String getVertrekDatum() {
@@ -107,5 +93,21 @@ public class Reis implements Serializable {
 
     public void setBestemmingLocatie(Locatie bestemmingLocatie) {
         this.bestemmingLocatie = bestemmingLocatie;
+    }
+
+    public Locatie getVertrekLocatie() {
+        return vertrekLocatie;
+    }
+
+    public void setVertrekLocatie(Locatie vertrekLocatie) {
+        this.vertrekLocatie = vertrekLocatie;
+    }
+
+    public Transportmiddel getTransportMiddel() {
+        return transportMiddel;
+    }
+
+    public void setTransportMiddel(Transportmiddel transportMiddel) {
+        this.transportMiddel = transportMiddel;
     }
 }
