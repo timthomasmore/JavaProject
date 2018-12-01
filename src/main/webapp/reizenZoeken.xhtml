@@ -22,12 +22,12 @@
 
             <div style="margin-bottom: 30px">
                 <p:outputLabel value="Vertrek:" for="vertrek" styleClass="zoek-label" />
-                <p:inputText id="vertrek" binding="#{vertrek}" required="true" style="height: 30px" />
+                <p:inputText id="vertrek" binding="#{vertrek}" style="height: 30px" />
             </div>
 
             <div style="margin-bottom: 30px">
                 <p:outputLabel value="Bestemming:" for="bestemming" styleClass="zoek-label" />
-                <p:inputText id="bestemming" binding="#{bestemming}" required="true" style="height: 30px" />
+                <p:inputText id="bestemming" binding="#{bestemming}" style="height: 30px" />
             </div>
 
 
@@ -39,19 +39,19 @@
 
             <div style="margin-bottom: 30px">
                 <p:outputLabel value="Aantal personen:" for="plaatsen" styleClass="zoek-label" />
-                <p:inputText id="plaatsen" binding="#{plaatsen}" required="true" style="height: 30px" />
+                <p:inputText id="plaatsen" binding="#{plaatsen}" value="0" style="height: 30px" type="number" min="0" />
             </div>
 
 
             <div style="margin-bottom: 30px">
                 <p:outputLabel value="Maximum prijs:" for="maxPrijs" styleClass="zoek-label" />
-                <p:inputText id="maxPrijs" binding="#{maxPrijs}" style="height: 30px" />
+                <p:inputText id="maxPrijs" binding="#{maxPrijs}" value="0" style="height: 30px" type="number" min="0" />
             </div>
 
 
             <div style="margin-bottom: 30px">
-                <p:outputLabel for="transportmiddel" value="Transportmiddel:" styleClass="zoek-label" />
-                <p:selectOneRadio id="transportmiddel" binding="#{transportmiddel}" required="true" layout="grid" columns="1">
+                <p:outputLabel for="transportmiddel" value="Transportmiddel:" />
+                <p:selectOneRadio id="transportmiddel" binding="#{transportmiddel}" layout="grid" columns="1">
                     <f:selectItems value="#{transportmiddelController.transportmiddelen}" var="transportmiddel" itemLabel="#{transportmiddel.naam}" itemValue="#{transportmiddel.naam}" />
                 </p:selectOneRadio>
             </div>
@@ -68,69 +68,11 @@
 
 
 
-            <p:dataTable var="reis" value="#{reizenController.reizen}" id="locationDataTable">
-                <p:column headerText="Id">
-                    <h:outputText value="#{reis.id}" />
-                </p:column>
 
-                <p:column headerText="Vertrek locatie">
-                    <h:outputText value="#{reis.vertrekLocatie.naam}" />
-                </p:column>
-
-                <p:column headerText="Bestemming locatie">
-                    <h:outputText value="#{reis.bestemmingLocatie.naam}" />
-                </p:column>
-
-                <p:column headerText="Prijs">
-                    <h:outputText value="#{reis.prijs}" />
-                </p:column>
-
-                <p:column headerText="Transport middel">
-                    <h:outputText value="#{reis.transportMiddel.naam}" />
-                </p:column>
-
-                <p:column headerText="Vertrek Datum">
-                    <h:outputText value="#{reis.vertrekDatum}" />
-                </p:column>
-
-                <p:column headerText="Vertrek uur">
-                    <h:outputText value="#{reis.vertrekUur}" />
-                </p:column>
-            </p:dataTable>
 
 
         </h:form>
     </ui:define>
-
-   <!-- <ui:define name = "content">
-
-
-        <h:dataTable value="#{reizenController.getReizen()}" var="reis" styleClass="table">
-            <h:column>
-                <f:facet name="header">Datum</f:facet>
-                #{reis.vertrekDatum} <br />
-                #{reis.vertrekUur}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Info</f:facet>
-                #{reis.vertrekLocatie.naam} <i class="fas fa-long-arrow-alt-right"></i>  #{reis.bestemmingLocatie.naam}<br />
-                    Transportmiddel: #{reis.transportMiddel.naam}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Prijs</f:facet>
-                #{reis.prijs}
-            </h:column>
-            <h:column rendered="#{!authenticationService.loggedIn}">
-                <f:facet name="header"></f:facet>
-                <h:link outcome="login">Aanmelden</h:link>
-            </h:column>
-            <h:column rendered="#{authenticationService.loggedIn}">
-                <f:facet name="header"></f:facet>
-                <h:form><h:commandLink value="Boeken" action="#{reizenController.getReisById(reis.id)}" /></h:form>
-            </h:column>
-        </h:dataTable>
-
-    </ui:define>-->
 
 </ui:composition>
 </body>

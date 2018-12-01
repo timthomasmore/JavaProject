@@ -64,8 +64,9 @@ public class ReizenController {
 
     public String zoekReizen(String vertrek, String bestemming, Integer plaatsen, double maxPrijs, String transportmiddel)
     {
-        maxPrijs = maxPrijs != 0 ? maxPrijs : 999999999;
-        transportmiddel = transportmiddel != null ? transportmiddel : "transportMiddel.naam";
+        vertrek = vertrek.length() == 0 ? null : vertrek;
+        bestemming = bestemming.length() == 0 ? null : bestemming;
+        transportmiddel = transportmiddel == "" ? null : transportmiddel;
 
         List<Reis> reizen = this.reisService.findReizen(vertrek, bestemming, plaatsen, maxPrijs, transportmiddel);
 
