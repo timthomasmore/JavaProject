@@ -19,7 +19,6 @@ public class ReizenController {
     public Reis getReis() {
         return reis;
     }
-
     public void setReis(Reis reis) {
         this.reis = reis;
     }
