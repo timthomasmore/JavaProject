@@ -31,10 +31,31 @@
             </div>
 
 
-            <!--<div style="margin-bottom: 30px">
-                <p:outputLabel for="vertrekDatum" value="Datum vertrek:" styleClass="zoek-label" />
-                    <p:calendar id="vertrekDatum" value="#{reizenController.vertrekDatum}" pattern="MMM dd, yyyy" style="height: 30px" />
-            </div>-->
+            <div style="margin-bottom: 30px">
+                <p:selectBooleanCheckbox binding="#{heenTerug}" label="Heen- en terugreis">
+                    <f:ajax render="terugDatumGroup" />
+                </p:selectBooleanCheckbox>
+                <p:outputLabel value="Heen- en terugreis?" for="vertrekDatum" styleClass="zoek-label" />
+            </div>
+
+
+            <div style="margin-bottom: 30px">
+                <p:outputLabel value="Vertrek datum:" for="vertrekDatum" styleClass="zoek-label" />
+                <p:inputText id="vertrekDatum" binding="#{vertrekDatum}" style="height: 30px" type="date">
+                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                </p:inputText>
+            </div>
+
+
+            <h:panelGroup id="terugDatumGroup">
+                <h:panelGroup layout="block" style="margin-bottom: 30px" rendered="#{heenTerug.value}">
+                    <p:outputLabel value="Terugkeer datum:" for="terugDatum" styleClass="zoek-label" />
+                    <p:inputText id="terugDatum" binding="#{terugDatum}" style="height: 30px" type="date">
+                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                    </p:inputText>
+                </h:panelGroup>
+            </h:panelGroup>
+
 
 
             <div style="margin-bottom: 30px">
@@ -59,7 +80,7 @@
 
             <div style="width: 100%; text-align: center">
                 <h:commandButton
-                        action="#{reizenController.zoekReizen(vertrek.value, bestemming.value, plaatsen.value, maxPrijs.value, transportmiddel.value)}"
+                        action="#{reizenController.zoekReizen(vertrek.value, bestemming.value, vertrekDatum.value, plaatsen.value, maxPrijs.value, transportmiddel.value, heenTerug.value, terugDatum.value)}"
                         value="Zoeken" styleClass="waves-effect waves-light btn ml-1" />
             </div>
 

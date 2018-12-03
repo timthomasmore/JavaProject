@@ -17,12 +17,15 @@ public class ReisRepository {
         return entityManager.createNamedQuery(Reis.FIND_ALL, Reis.class).getResultList();
     }
 
-    public List<Reis> find(String vertrek, String bestemming, int plaatsen, double maxPrijs, String transportmiddel) {
-        Reis.createSearchQuery(vertrek, bestemming, plaatsen, maxPrijs, transportmiddel);
+    public List<Reis> find(String vertrek, String bestemming, Date vertrekDatum, int plaatsen, double maxPrijs, String transportmiddel) {
+        Reis.createSearchQuery(vertrek, bestemming, vertrekDatum, plaatsen, maxPrijs, transportmiddel);
         TypedQuery nq = entityManager.createQuery(Reis.FIND_QUERY, Reis.class);
+
+        vertrekDatum = vertrekDatum == null ? new java.sql.Date(new Date().getTime()) : vertrekDatum;
 
         nq = vertrek == null ? nq : nq.setParameter("vertrek", "%" + vertrek.trim() + "%");
         nq = bestemming == null ? nq : nq.setParameter("bestemming", "%" + bestemming.trim() + "%");
+        nq = vertrekDatum == null ? nq : nq.setParameter("vertrekDatum", vertrekDatum + "");
         nq = plaatsen <= 0 ? nq : nq.setParameter("plaatsen", plaatsen);
         nq = maxPrijs <= 0 ? nq : nq.setParameter("maxPrijs", maxPrijs);
         nq = transportmiddel == null ? nq : nq.setParameter("transportmiddel", transportmiddel.trim());
