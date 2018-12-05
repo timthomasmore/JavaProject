@@ -43,3 +43,25 @@ a.footerlink:hover {
 html {
     color: #333333;
 }
+
+/* Start homepage */
+.homepage-background {
+    background: url(../images/homepage_background.jpeg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.homepage-nav {
+    background-color: rgba(0, 0, 0, 0.25) !important;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.homepage-form {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 15px;
+}
+/* End homepage */

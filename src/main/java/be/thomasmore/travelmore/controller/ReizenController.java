@@ -81,6 +81,16 @@ public class ReizenController {
         return "reizenFiltered";
     }
 
+    public String zoekReizenHomepage(String bestemming){
+        bestemming = bestemming.length() == 0 ? null : bestemming;
+        List<Reis> reizen = this.reisService.findReizen(null, bestemming, null, 0, 0, null);
+
+        reizen = formateerDatum(reizen);
+
+        setReizenFiltered(reizen);
+        return "reizenFiltered";
+    }
+
     public List<Reis> formateerDatum(List<Reis> reizen) {
         for (Reis reis : reizen) {
             reis.setVertrekUur(reis.getVertrekUur().substring(0, 2) + "u" + reis.getVertrekUur().substring(3, 5));
