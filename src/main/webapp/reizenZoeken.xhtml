@@ -21,13 +21,19 @@
             <p:growl id="growl" showDetail="true" />
 
             <div style="margin-bottom: 30px">
-                <p:outputLabel value="Vertrek:" for="vertrek" styleClass="zoek-label" />
-                <p:inputText id="vertrek" binding="#{vertrek}" style="height: 30px" />
+                <p:outputLabel for="vertrek" value="Vertrek: " />
+                <p:selectOneMenu id="vertrek" value="#{vertrek}">
+                    <f:selectItem itemLabel="Selecteer vertrek" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{locatieController.locaties}" var="locatie" itemValue="#{locatie.naam}" itemLabel="#{locatie.naam}" />
+                </p:selectOneMenu>
             </div>
 
             <div style="margin-bottom: 30px">
-                <p:outputLabel value="Bestemming:" for="bestemming" styleClass="zoek-label" />
-                <p:inputText id="bestemming" binding="#{bestemming}" style="height: 30px" />
+                <p:outputLabel for="bestemming" value="Bestemming: " />
+                <p:selectOneMenu id="bestemming" value="#{bestemming}">
+                    <f:selectItem itemLabel="Selecteer bestemming" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{locatieController.locaties}" var="locatie" itemValue="#{locatie.naam}" itemLabel="#{locatie.naam}" />
+                </p:selectOneMenu>
             </div>
 
 
@@ -80,7 +86,7 @@
 
             <div style="width: 100%; text-align: center">
                 <h:commandButton
-                        action="#{reizenController.zoekReizen(vertrek.value, bestemming.value, vertrekDatum.value, plaatsen.value, maxPrijs.value, transportmiddel.value, heenTerug.value, terugDatum.value)}"
+                        action="#{reizenController.zoekReizen(vertrek, bestemming, vertrekDatum.value, plaatsen.value, maxPrijs.value, transportmiddel.value, heenTerug.value, terugDatum.value)}"
                         value="Zoeken" styleClass="waves-effect waves-light btn ml-1" />
             </div>
 

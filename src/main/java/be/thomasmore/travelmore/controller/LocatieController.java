@@ -13,6 +13,7 @@ import java.util.List;
 public class LocatieController {
 
     private Locatie newLocatie = new Locatie();
+    private List<Locatie> locaties;
 
     @Inject
     private LocatieService LocatieService;
@@ -27,6 +28,10 @@ public class LocatieController {
 
     public List<Locatie> getLocaties(){
         return this.LocatieService.findAllLocaties();
+    }
+
+    public void setLocaties(List<Locatie> locaties) {
+        this.locaties = locaties;
     }
 
     public void submit(){
