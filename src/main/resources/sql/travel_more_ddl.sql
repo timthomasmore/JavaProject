@@ -30,12 +30,12 @@ CREATE TABLE klant (
 -- Startdata for table `klant`
 --
 
-INSERT INTO `klant` (`id`, `voornaam`, `achternaam`, `email`, `wachtwoord`) VALUES
+/*INSERT INTO `klant` (`id`, `voornaam`, `achternaam`, `email`, `wachtwoord`) VALUES
   (1, 'Alexander', 'V', 'alexander.v@gmail.com', 'test1'),
   (2, 'Marie', 'B', 'marie.b@gmail.com', 'test2'),
   (3, 'Stef', 'DC', 'stef.dc@gmail.com', 'test3'),
   (4, 'Yannick', 'P', 'yannick.p@gmail.com', 'test4'),
-  (5, 'Rob', 'W', 'rob.w@gmail.com', 'test5');
+  (5, 'Rob', 'W', 'rob.w@gmail.com', 'test5');*/
 
 -- --------------------------------------------------------
 
@@ -62,12 +62,12 @@ CREATE TABLE boeking (
 -- Startdata for table `boeking`
 --
 
-INSERT INTO `boeking` (`id`, `klantId`, `prijs`, `isBetaald`, `heenReisId`, `terugReisId`) VALUES
+/*INSERT INTO `boeking` (`id`, `klantId`, `prijs`, `isBetaald`, `heenReisId`, `terugReisId`) VALUES
   (1, 1, 567.89, TRUE, 1, 2),
   (2, 2, 123.45, FALSE, 2, 3),
   (3, 3, 500.59, TRUE, 3, 4),
   (4, 4, 567.8, FALSE, 4, 5),
-  (5, 5, 420.69, FALSE, 5, 1);
+  (5, 5, 420.69, FALSE, 5, 1);*/
 
 -- --------------------------------------------------------
 
