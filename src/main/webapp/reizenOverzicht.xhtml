@@ -12,7 +12,6 @@
 <body>
 <ui:composition template = "templates/templ.xhtml">
     <ui:define name = "content">
-        <h:link value="Terug" outcome="index"></h:link>
 
         <h:dataTable value="#{reizenController.getReizen()}" var="reis" styleClass="table">
             <h:column>

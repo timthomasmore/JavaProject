@@ -12,8 +12,6 @@
 <body>
 <ui:composition template = "templates/templ.xhtml">
     <ui:define name = "content">
-        <h:link value="Terug" outcome="index"></h:link>
-
         <h:dataTable value="#{reizenController.reizenFiltered}" var="reis" styleClass="table">
             <h:column>
                 <f:facet name="header">Datum</f:facet>
@@ -38,6 +36,8 @@
                 <h:form><h:commandLink value="Boeken" action="#{reizenController.getReisById(reis.id)}" /></h:form>
             </h:column>
         </h:dataTable>
+
+        <h:link outcome="reizenOverzicht" class="waves-effect waves-light btn mt-1">Toon alle reizen</h:link>
 
     </ui:define>
 </ui:composition>

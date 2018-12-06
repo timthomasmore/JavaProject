@@ -34,6 +34,10 @@ main {
 .ml-1 {
     margin-left: 1rem;
 }
+
+.mt-1 {
+    margin-top: 1rem;
+}
 /* End Margins */
 
 a.footerlink:hover {
