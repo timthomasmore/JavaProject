@@ -20,7 +20,6 @@ public class ReizenController {
     public List<Reis> reizen;
     public List<Reis> reizenFiltered;
 
-
     public Date getVertrekDatum() {
         return vertrekDatum;
     }
@@ -61,12 +60,29 @@ public class ReizenController {
         return "reizenDetail.xhtml";
     }
 
-    public String zoekReizen(String vertrek, String bestemming, Integer plaatsen, double maxPrijs, String transportmiddel)
+    public String zoekReizen(String vertrek, String bestemming, Date vDate, Integer plaatsen, double maxPrijs, String transportmiddel, boolean heenTerug, Date tDate)
     {
-        maxPrijs = maxPrijs != 0 ? maxPrijs : 999999999;
-        transportmiddel = transportmiddel != null ? transportmiddel : "transportMiddel.naam";
+        vertrek = vertrek.length() == 0 ? null : vertrek;
+        bestemming = bestemming.length() == 0 ? null : bestemming;
+        transportmiddel = transportmiddel == "" ? null : transportmiddel;
+        java.sql.Date vertrekDatum = vDate == null ? null : new java.sql.Date(vDate.getTime());
+        java.sql.Date terugDatum = tDate == null ? null : new java.sql.Date(tDate.getTime());
 
-        List<Reis> reizen = this.reisService.findReizen(vertrek, bestemming, plaatsen, maxPrijs, transportmiddel);
+        List<Reis> reizen = this.reisService.findReizen(vertrek, bestemming, vertrekDatum, plaatsen, maxPrijs, transportmiddel);
+        List<Reis> terugReizen = heenTerug ? this.reisService.findReizen(bestemming, vertrek, terugDatum, plaatsen, maxPrijs, transportmiddel) : null;
+        if ( terugReizen != null) {
+            reizen.addAll(terugReizen);
+        }
+
+        reizen = formateerDatum(reizen);
+
+        setReizenFiltered(reizen);
+        return "reizenFiltered";
+    }
+
+    public String zoekReizenHomepage(String bestemming){
+        bestemming = bestemming.length() == 0 ? null : bestemming;
+        List<Reis> reizen = this.reisService.findReizen(null, bestemming, null, 0, 0, null);
 
         reizen = formateerDatum(reizen);
 

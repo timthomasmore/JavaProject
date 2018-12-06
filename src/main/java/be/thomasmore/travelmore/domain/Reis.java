@@ -2,6 +2,7 @@ package be.thomasmore.travelmore.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "reis")
@@ -10,15 +11,6 @@ import java.io.Serializable;
                 @NamedQuery(
                         name = Reis.FIND_ALL,
                         query = "SELECT r FROM Reis r"
-                ),
-                @NamedQuery(
-                        name = Reis.FIND,
-                        query = "SELECT r FROM Reis r" +
-                                " where r.vertrekLocatie.naam = :vertrek" +
-                                " and r.bestemmingLocatie.naam = :bestemming" +
-                                " and r.transportMiddel.maxPlaatsen >= :plaatsen" +
-                                " and r.prijs <= :maxPrijs" +
-                                " and r.transportMiddel.naam = :transportMiddel"
                 ),
                 @NamedQuery(
                         name = Reis.FIND_BY_ID,
@@ -30,6 +22,7 @@ import java.io.Serializable;
 public class Reis implements Serializable {
     public static final String FIND_ALL = "Reis.findAll";
     public static final String FIND = "Reis.find";
+    public static String FIND_QUERY;
     public static final String FIND_BY_ID = "Reis.findById";
 
     @Id
@@ -109,5 +102,18 @@ public class Reis implements Serializable {
 
     public void setTransportMiddel(Transportmiddel transportMiddel) {
         this.transportMiddel = transportMiddel;
+    }
+
+    public static String createSearchQuery(String vertrek, String bestemming, Date vertrekDatum, int plaatsen, double maxPrijs, String transportmiddel) {
+        FIND_QUERY = "Select r from Reis r where";
+
+        FIND_QUERY = FIND_QUERY + " r.vertrekDatum " + (vertrekDatum == null ? ">= " : "= ") + ":vertrekDatum";
+        FIND_QUERY = vertrek != null ? FIND_QUERY + " and r.vertrekLocatie.naam like :vertrek" : FIND_QUERY;
+        FIND_QUERY = bestemming != null ? FIND_QUERY + " and r.bestemmingLocatie.naam like :bestemming" : FIND_QUERY;
+        FIND_QUERY = plaatsen > 0 ? FIND_QUERY + " and r.transportMiddel.maxPlaatsen >= :plaatsen" : FIND_QUERY;
+        FIND_QUERY = maxPrijs > 0 ? FIND_QUERY + " and r.prijs <= :maxPrijs" : FIND_QUERY;
+        FIND_QUERY = transportmiddel != null ? FIND_QUERY + " and r.transportMiddel.naam like :transportmiddel" : FIND_QUERY;
+
+        return FIND_QUERY;
     }
 }

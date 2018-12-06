@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      class="homepage-background">
 <h:head>
     <title>Travel More! random tekst</title>
     <!-- Compiled and minified Materialize CSS -->
@@ -22,12 +23,12 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="resources/css/style.css"/>
 </h:head>
-<h:body class="background-beige">
+<h:body>
     <header>
-        <nav class="main-blue" role="navigation">
+        <nav class="transparent homepage-nav" role="navigation">
             <div class="nav-wrapper container"><h:link outcome="index" id="logo-container"
                                                        class="brand-logo">Tropical Travel</h:link>
-                <ul class="right hide-on-med-and-down">
+                <ul class="right hide-on-med-and-down gray-text">
                     <h:panelGroup rendered="#{!authenticationService.loggedIn}">
                         <li><h:link outcome="login">Aanmelden</h:link></li>
                         <li><h:link outcome="register">Registreren</h:link></li>
@@ -52,39 +53,6 @@
             </div>
         </div>
     </main>
-    <footer class="page-footer main-light-blue">
-        <div class="container">
-            <div class="row">
-                <div class="col l3 s12">
-                    <h5 class="white-text">Menu</h5>
-                    <ul>
-                        <li><h:link styleClass="white-text footerlink" outcome="reizenOverzicht">Alle reizen</h:link></li>
-                        <li><a class="white-text" href="#!">Link 2</a></li>
-                        <li><a class="white-text" href="#!">Link 3</a></li>
-                        <li><a class="white-text" href="#!">Link 4</a></li>
-                    </ul>
-                </div>
-                <div class="col l6 s12">
-
-                </div>
-                <div class="col l3 s12">
-                    <h5 class="white-text">Groep 4</h5>
-                    <ul>
-                        <li class="white-text">Joren Synaeve</li>
-                        <li class="white-text">Tim Embrechts</li>
-                        <li class="white-text">Jordi Bols</li>
-                        <li class="white-text">Michiel Olijslagers</li>
-                        <li class="white-text">Tim Van Meerbeeck</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="container">
-                Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-            </div>
-        </div>
-    </footer>
 
 </h:body>
 

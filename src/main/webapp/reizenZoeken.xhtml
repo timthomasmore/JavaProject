@@ -21,37 +21,64 @@
             <p:growl id="growl" showDetail="true" />
 
             <div style="margin-bottom: 30px">
-                <p:outputLabel value="Vertrek:" for="vertrek" styleClass="zoek-label" />
-                <p:inputText id="vertrek" binding="#{vertrek}" required="true" style="height: 30px" />
+                <p:outputLabel for="vertrek" value="Vertrek: " />
+                <p:selectOneMenu id="vertrek" value="#{vertrek}">
+                    <f:selectItem itemLabel="Selecteer vertrek" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{locatieController.locaties}" var="locatie" itemValue="#{locatie.naam}" itemLabel="#{locatie.naam}" />
+                </p:selectOneMenu>
             </div>
 
             <div style="margin-bottom: 30px">
-                <p:outputLabel value="Bestemming:" for="bestemming" styleClass="zoek-label" />
-                <p:inputText id="bestemming" binding="#{bestemming}" required="true" style="height: 30px" />
+                <p:outputLabel for="bestemming" value="Bestemming: " />
+                <p:selectOneMenu id="bestemming" value="#{bestemming}">
+                    <f:selectItem itemLabel="Selecteer bestemming" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{locatieController.locaties}" var="locatie" itemValue="#{locatie.naam}" itemLabel="#{locatie.naam}" />
+                </p:selectOneMenu>
             </div>
 
 
-            <!--<div style="margin-bottom: 30px">
-                <p:outputLabel for="vertrekDatum" value="Datum vertrek:" styleClass="zoek-label" />
-                    <p:calendar id="vertrekDatum" value="#{reizenController.vertrekDatum}" pattern="MMM dd, yyyy" style="height: 30px" />
-            </div>-->
+            <div style="margin-bottom: 30px">
+                <p:selectBooleanCheckbox binding="#{heenTerug}" label="Heen- en terugreis">
+                    <f:ajax render="terugDatumGroup" />
+                </p:selectBooleanCheckbox>
+                <p:outputLabel value="Heen- en terugreis?" for="vertrekDatum" styleClass="zoek-label" />
+            </div>
+
+
+            <div style="margin-bottom: 30px">
+                <p:outputLabel value="Vertrek datum:" for="vertrekDatum" styleClass="zoek-label" />
+                <p:inputText id="vertrekDatum" binding="#{vertrekDatum}" style="height: 30px" type="date">
+                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                </p:inputText>
+            </div>
+
+
+            <h:panelGroup id="terugDatumGroup">
+                <h:panelGroup layout="block" style="margin-bottom: 30px" rendered="#{heenTerug.value}">
+                    <p:outputLabel value="Terugkeer datum:" for="terugDatum" styleClass="zoek-label" />
+                    <p:inputText id="terugDatum" binding="#{terugDatum}" style="height: 30px" type="date">
+                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                    </p:inputText>
+                </h:panelGroup>
+            </h:panelGroup>
+
 
 
             <div style="margin-bottom: 30px">
                 <p:outputLabel value="Aantal personen:" for="plaatsen" styleClass="zoek-label" />
-                <p:inputText id="plaatsen" binding="#{plaatsen}" required="true" style="height: 30px" />
+                <p:inputText id="plaatsen" binding="#{plaatsen}" value="0" style="height: 30px" type="number" min="0" />
             </div>
 
 
             <div style="margin-bottom: 30px">
                 <p:outputLabel value="Maximum prijs:" for="maxPrijs" styleClass="zoek-label" />
-                <p:inputText id="maxPrijs" binding="#{maxPrijs}" style="height: 30px" />
+                <p:inputText id="maxPrijs" binding="#{maxPrijs}" value="0" style="height: 30px" type="number" min="0" />
             </div>
 
 
             <div style="margin-bottom: 30px">
-                <p:outputLabel for="transportmiddel" value="Transportmiddel:" styleClass="zoek-label" />
-                <p:selectOneRadio id="transportmiddel" binding="#{transportmiddel}" required="true" layout="grid" columns="1">
+                <p:outputLabel for="transportmiddel" value="Transportmiddel:" />
+                <p:selectOneRadio id="transportmiddel" binding="#{transportmiddel}" layout="grid" columns="1">
                     <f:selectItems value="#{transportmiddelController.transportmiddelen}" var="transportmiddel" itemLabel="#{transportmiddel.naam}" itemValue="#{transportmiddel.naam}" />
                 </p:selectOneRadio>
             </div>
@@ -59,7 +86,7 @@
 
             <div style="width: 100%; text-align: center">
                 <h:commandButton
-                        action="#{reizenController.zoekReizen(vertrek.value, bestemming.value, plaatsen.value, maxPrijs.value, transportmiddel.value)}"
+                        action="#{reizenController.zoekReizen(vertrek, bestemming, vertrekDatum.value, plaatsen.value, maxPrijs.value, transportmiddel.value, heenTerug.value, terugDatum.value)}"
                         value="Zoeken" styleClass="waves-effect waves-light btn ml-1" />
             </div>
 
@@ -68,69 +95,11 @@
 
 
 
-            <p:dataTable var="reis" value="#{reizenController.reizen}" id="locationDataTable">
-                <p:column headerText="Id">
-                    <h:outputText value="#{reis.id}" />
-                </p:column>
 
-                <p:column headerText="Vertrek locatie">
-                    <h:outputText value="#{reis.vertrekLocatie.naam}" />
-                </p:column>
-
-                <p:column headerText="Bestemming locatie">
-                    <h:outputText value="#{reis.bestemmingLocatie.naam}" />
-                </p:column>
-
-                <p:column headerText="Prijs">
-                    <h:outputText value="#{reis.prijs}" />
-                </p:column>
-
-                <p:column headerText="Transport middel">
-                    <h:outputText value="#{reis.transportMiddel.naam}" />
-                </p:column>
-
-                <p:column headerText="Vertrek Datum">
-                    <h:outputText value="#{reis.vertrekDatum}" />
-                </p:column>
-
-                <p:column headerText="Vertrek uur">
-                    <h:outputText value="#{reis.vertrekUur}" />
-                </p:column>
-            </p:dataTable>
 
 
         </h:form>
     </ui:define>
-
-   <!-- <ui:define name = "content">
-
-
-        <h:dataTable value="#{reizenController.getReizen()}" var="reis" styleClass="table">
-            <h:column>
-                <f:facet name="header">Datum</f:facet>
-                #{reis.vertrekDatum} <br />
-                #{reis.vertrekUur}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Info</f:facet>
-                #{reis.vertrekLocatie.naam} <i class="fas fa-long-arrow-alt-right"></i>  #{reis.bestemmingLocatie.naam}<br />
-                    Transportmiddel: #{reis.transportMiddel.naam}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Prijs</f:facet>
-                #{reis.prijs}
-            </h:column>
-            <h:column rendered="#{!authenticationService.loggedIn}">
-                <f:facet name="header"></f:facet>
-                <h:link outcome="login">Aanmelden</h:link>
-            </h:column>
-            <h:column rendered="#{authenticationService.loggedIn}">
-                <f:facet name="header"></f:facet>
-                <h:form><h:commandLink value="Boeken" action="#{reizenController.getReisById(reis.id)}" /></h:form>
-            </h:column>
-        </h:dataTable>
-
-    </ui:define>-->
 
 </ui:composition>
 </body>
