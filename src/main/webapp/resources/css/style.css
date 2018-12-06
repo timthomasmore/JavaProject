@@ -15,7 +15,7 @@
 }
 
 .background-beige {
-    background-color: #EAE7DC !important;
+    background-color: #c3977a !important;
 }
 
 /* Start Sticky Footer */
@@ -73,14 +73,32 @@ html {
     display: block;
 }
 
-.ui-selectonemenu .ui-selectonemenu .ui-selectonemenu-trigger {
+.ui-selectonemenu .ui-selectonemenu-trigger {
     padding: 0;
 }
 
-.btn-homepage {
+.btn, .btn:active, .btn:hover {
     background-color: #c3977a;
 }
 
 .waves-button-input {
     color: white;
 }
+
+/* Begin template */
+.image-background {
+    background: url(../images/homepage_background.jpeg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.content-section {
+    background-color: rgba(255,255,255,0.7);
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+}
+/* End template */
