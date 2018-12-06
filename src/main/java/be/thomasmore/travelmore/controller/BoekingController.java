@@ -3,14 +3,20 @@ package be.thomasmore.travelmore.controller;
 import be.thomasmore.travelmore.domain.Reis;
 import be.thomasmore.travelmore.service.KlantService;
 import be.thomasmore.travelmore.utility.AuthenticationService;
+import be.thomasmore.travelmore.utility.PdfMaker;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.annotation.Resource;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.util.Properties;
 
 @ViewScoped
@@ -26,6 +32,15 @@ public class BoekingController {
     }
 
     public String boekReis(int betaalmethode, Reis reis) {
+        PdfMaker pdfMaker = new PdfMaker();
+        try{
+            pdfMaker.boekingspdf(reis, authService.getKlant());
+        } catch (Exception e){
+            System.out.println(e);
+        }
+
+        String pdfnaam = System.getProperty("user.dir") + "/reis" + reis.getId() + "-" + authService.getKlant().getId()  + ".pdf";
+
         final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
         Properties props = System.getProperties();
         props.setProperty("mail.smtp.host", "smtp.gmail.com");
@@ -64,7 +79,7 @@ public class BoekingController {
         body += "\n\nGoede reis!";
         body += "\nMet vriendelijke groeten";
         body += "\n\nTropical Travel";
-        sendMail(to, "Bevestiging", body);
+        sendMail(to, "Bevestiging", body,pdfnaam);
 
         return "boekingBevestiging";
     }
@@ -77,6 +92,37 @@ public class BoekingController {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject(subject);
             message.setText(body);
+
+            Transport.send(message);
+            System.out.println("Mail sent!");
+        } catch (MessagingException e) {
+            System.out.println("Error sending mail!");
+            System.out.println(e);
+        }
+    }
+
+    private void sendMail(String to, String subject, String body, String attachmentpath) {
+        try {
+
+
+            Message message = new MimeMessage(session);
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message.setSubject(subject);
+
+            BodyPart messageBodyPart = new MimeBodyPart();
+            messageBodyPart.setText(body);
+
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(messageBodyPart);
+
+            messageBodyPart = new MimeBodyPart();
+            String filename = attachmentpath;
+            DataSource source = new FileDataSource(filename);
+            messageBodyPart.setDataHandler(new DataHandler(source));
+            messageBodyPart.setFileName(filename);
+            multipart.addBodyPart(messageBodyPart);
+
+            message.setContent(multipart);
 
             Transport.send(message);
             System.out.println("Mail sent!");
