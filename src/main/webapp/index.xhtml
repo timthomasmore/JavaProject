@@ -18,10 +18,13 @@
                             <h4>Vertrek vandaag nog</h4>
                             <h:form action="zoek_reizen">
                                 <p:outputLabel value="Kies je bestemming" for="bestemming" styleClass="zoek-label"/>
-                                <p:inputText id="bestemming" binding="#{bestemming}" style="height: 30px"/>
+                                <p:selectOneMenu id="bestemming" value="#{bestemming}" styleClass="form-control">
+                                    <f:selectItem itemLabel="Selecteer bestemming" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{locatieController.locaties}" var="locatie" itemValue="#{locatie.naam}" itemLabel="#{locatie.naam}" />
+                                </p:selectOneMenu>
                                 <h:commandButton
-                                        action="#{reizenController.zoekReizenHomepage(bestemming.value)}"
-                                        value="Zoeken" styleClass="waves-effect waves-light btn"/>
+                                        action="#{reizenController.zoekReizenHomepage(bestemming)}"
+                                        value="Zoeken" styleClass="waves-effect waves-light btn btn-homepage"/>
                             </h:form>
                         </div>
                     </div>
