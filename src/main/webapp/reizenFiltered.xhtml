@@ -27,7 +27,7 @@
             </h:column>
             <h:column>
                 <f:facet name="header">Prijs</f:facet>
-                #{reis.prijs}
+                € #{reis.prijs}
             </h:column>
             <h:column rendered="#{!authenticationService.loggedIn}">
                 <f:facet name="header"></f:facet>

@@ -11,14 +11,16 @@
 <body>
 <ui:composition template = "templates/templ.xhtml">
     <ui:define name = "content">
+        <p>Beste <h:outputText value="#{authenticationService.klant.voornaam}"/>, u staat op het punt een reis te boeken!</p>
+        <p>Hieronder een overzicht van uw reis:</p>
+        <ul class="collection">
+            <li class="collection-item">Je vertekt vanuit: <h:outputText value="#{reizenController.reis.vertrekLocatie.naam}" /></li>
+            <li class="collection-item">Je bestemming: <h:outputText value="#{reizenController.reis.bestemmingLocatie.naam}" /></li>
+            <li class="collection-item">Je reist met: <h:outputText value="#{reizenController.reis.transportMiddel.naam}" /></li>
+            <li class="collection-item">Je vertrekt op: <h:outputText value="#{reizenController.reis.vertrekDatum}" /> om: <h:outputText value="#{reizenController.reis.vertrekUur}" /></li>
+            <li class="collection-item">Kostprijs: € <h:outputText value="#{reizenController.reis.prijs}" /></li>
+        </ul>
         <h:link value="Terug naar overzicht" outcome="reizenOverzicht"></h:link> <br /><br />
-        Id: <h:outputText value="#{reizenController.reis.id}" /><br />
-        Prijs: <h:outputText value="#{reizenController.reis.prijs}" /><br />
-        Vertrek: <h:outputText value="#{reizenController.reis.vertrekLocatie.naam}" /><br />
-        Bestemming: <h:outputText value="#{reizenController.reis.bestemmingLocatie.naam}" /><br />
-        Voertuig id: <h:outputText value="#{reizenController.reis.transportMiddel.naam}" /> <br />
-        Vertrek datum: <h:outputText value="#{reizenController.reis.vertrekDatum}" /><br />
-        Vertrek uur: <h:outputText value="#{reizenController.reis.vertrekUur}" /><br />
         <h:form><h:commandLink value="Betalen met Bancontact" action="#{boekingController.boekReis(1, reizenController.reis)}" /></h:form>
         <h:form><h:commandLink value="Betalen met VISA" action="#{boekingController.boekReis(2, reizenController.reis)}" /></h:form>
         <h:form><h:commandLink value="Betalen met PayPal" action="#{boekingController.boekReis(3, reizenController.reis)}" /></h:form>
