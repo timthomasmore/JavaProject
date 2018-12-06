@@ -101,4 +101,8 @@ html {
     border-radius: 1rem;
     padding: 1rem 2rem;
 }
+
+.background-transparent {
+    background-color: rgba(0,0,0,0.25);
+}
 /* End template */
