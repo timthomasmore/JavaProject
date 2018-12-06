@@ -56,7 +56,7 @@ public class ReizenController {
     }
 
     public String getReisById(int id) {
-        this.setReis(this.reisService.findById(id));
+        this.setReis(formateerDatumSingle(this.reisService.findById(id)));
         return "reizenDetail.xhtml";
     }
 
@@ -92,11 +92,27 @@ public class ReizenController {
 
     public List<Reis> formateerDatum(List<Reis> reizen) {
         for (Reis reis : reizen) {
-            reis.setVertrekUur(reis.getVertrekUur().substring(0, 2) + "u" + reis.getVertrekUur().substring(3, 5));
+            if (reis.getVertrekUur().length() > 7) {
+                reis.setVertrekUur(reis.getVertrekUur().substring(0, 2) + "u" + reis.getVertrekUur().substring(3, 5));
+            } else {
+                reis.setVertrekUur("0" + reis.getVertrekUur().substring(0, 1) + "u" + reis.getVertrekUur().substring(2, 4));
+            }
+
             String[] parts = reis.getVertrekDatum().split("-");
             reis.setVertrekDatum(parts[2] + "/" + parts[1] + "/" + parts[0]);
         }
         return reizen;
+    }
+
+    public Reis formateerDatumSingle(Reis reis){
+        if (reis.getVertrekUur().length() > 7) {
+            reis.setVertrekUur(reis.getVertrekUur().substring(0, 2) + "u" + reis.getVertrekUur().substring(3, 5));
+        } else {
+            reis.setVertrekUur("0" + reis.getVertrekUur().substring(0, 1) + "u" + reis.getVertrekUur().substring(2, 4));
+        }
+        String[] parts = reis.getVertrekDatum().split("-");
+        reis.setVertrekDatum(parts[2] + "/" + parts[1] + "/" + parts[0]);
+        return reis;
     }
 
 
